@@ -60,8 +60,6 @@ User Stories on Github:
 
 Moqup/Wireframes: https://sketchboard.me/lCfKvMkusgnz#/
 
-
-
 Other Research
 
 Research for any external libraries/tools/technology your application will be using: (External API’S, CSS Frameworks, etc.)
