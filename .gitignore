@@ -1,0 +1,14 @@
+package-lock.json
+node_modules/
+api
+database.json
+.DS_Store
+__pycache__
+*.pyc
+bin
+obj
+*.db
+*.sqlite3
+.vscode
+dist
+Settings.js
