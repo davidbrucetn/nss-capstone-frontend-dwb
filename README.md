@@ -36,7 +36,7 @@ Save user picture and any other ideas for enhancements that come up in developme
 Things you want your mentor to check in on:
 If I’m shooting myself in the foot?
 
-User Stories (can be integrated into MVP def)
+User Stories on Github: 
 When a user comes to the landing page, given they do not have a login, then there should be an affordance to register a new login.
 Given the user has already registered, then the user my login from the landing page.
 Given the user wants to find restaurants with delivery, drive through, or outdoor dining, then they can use an affordance to query with those filters.
@@ -45,6 +45,7 @@ Given the user adds a restaurant to their collection, then there will be afforda
 Given the user wants to delete a restaurant from a collection, then there should be an affordance to do so.
 Given the user wants to enter profile information, there should be an affordance to do so.
 Given the user wants to edit their profile, there should be an affordance to change their password.
+
 
 Planning Links
 
