@@ -11,40 +11,42 @@ https://github.com/davidbrucetn/nss-capstone-frontend-dwb
 Name of Project: CoviDining
 
 Brief Proposal: CoviDining is a restaurant app for the Covid life, for people to look up restaurants that either have delivery, outdoor dining, or drive through windows, and save them to their list. If they don't have outdoor dining, they can save the restaurant details, like waitstaff wearing masks, etc to their collection.
+
 Overview of Application: 
-What problem does your application solve? 
-Since the advent of the COVID-19 virus, the US finds virus numbers keep climbing, and no vaccine is currently available. This app will allow people search for establishments that people will feel safer ordering from.
-Who are the target users of this application?  
-Any people who want to eat out without worry of exposure to COVID-19.
-What can a user do with this application?
-Search for restaurants by options of outdoor dining, delivery, or drive through, and save them to their local collection, as well as make note of whether the establishment employees wear masks and/or gloves, etc.
-Why do you want to build this application?
-These are all things that many people, including myself, think about when we want to get food from a restaurant these days.
+  What problem does your application solve? 
+    Since the advent of the COVID-19 virus, the US finds virus numbers keep climbing, and no vaccine is currently available. This app will allow people search for establishments that people will feel safer ordering from.
+  Who are the target users of this application?  
+    Any people who want to eat out without worry of exposure to COVID-19.
+  What can a user do with this application?
+    Search for restaurants by options of outdoor dining, delivery, or drive through, and save them to their local collection, as well as make note of whether the establishment employees wear masks and/or gloves, etc.
+  Why do you want to build this application?
+    These are all things that many people, including myself, think about when we want to get food from a restaurant these days.
 
 Features included in MVP Definition: 
-Register and login users
-Save user profile info
-Search restaurants by one of three different options: 
-Outdoor Seating
-Delivery
-Drive Through
-Save Restaurant to Collection with notes and/or PPE boolean.
+  Register and login users
+  Save user profile info
+  Search restaurants by one of three different options: 
+  Outdoor Seating
+  Delivery
+  Drive Through
+  Save Restaurant to Collection with notes and/or PPE boolean.
 
 Features that are Stretch Goals:
-Save user picture and any other ideas for enhancements that come up in development.
+  Save user picture and any other ideas for enhancements that come up in development.
 
 Things you want your mentor to check in on:
-If I’m shooting myself in the foot?
+  If I’m shooting myself in the foot?
 
 User Stories on Github: 
-When a user comes to the landing page, given they do not have a login, then there should be an affordance to register a new login.
-Given the user has already registered, then the user my login from the landing page.
-Given the user wants to find restaurants with delivery, drive through, or outdoor dining, then they can use an affordance to query with those filters.
-Given user wants to save a restaurant to their collection, then there should be an affordance to do so.
-Given the user adds a restaurant to their collection, then there will be affordances to make notes or indicate the use of PPE at said restaurant.
-Given the user wants to delete a restaurant from a collection, then there should be an affordance to do so.
-Given the user wants to enter profile information, there should be an affordance to do so.
-Given the user wants to edit their profile, there should be an affordance to change their password.
+
+  When a user comes to the landing page, given they do not have a login, then there should be an affordance to register a new login.
+  Given the user has already registered, then the user my login from the landing page.
+  Given the user wants to find restaurants with delivery, drive through, or outdoor dining, then they can use an affordance to query with those filters.
+  Given user wants to save a restaurant to their collection, then there should be an affordance to do so.
+  Given the user adds a restaurant to their collection, then there will be affordances to make notes or indicate the use of PPE at said restaurant.
+  Given the user wants to delete a restaurant from a collection, then there should be an affordance to do so.
+  Given the user wants to enter profile information, there should be an affordance to do so.
+  Given the user wants to edit their profile, there should be an affordance to change their password.
 
 
 Planning Links
