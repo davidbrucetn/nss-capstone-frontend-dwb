@@ -1,7 +1,9 @@
 import { Route, Redirect } from "react-router-dom";
-import React from "react";
+import React, {useState} from "react";
 
+import RegistrationForm from "./auth/Registration"
 import Login from "./auth/Login";
+import AlertComponent from "./auth/AlertComponent"
 import Home from "./home/Home";
 import RestaurantList from "./restaurant/RestaurantList"
 import RestaurantDetail from "./restaurant/RestaurantDetails"
@@ -11,6 +13,9 @@ const ApplicationViews = (props) => {
   const hasUser = props.hasUser;
   const setUser = props.setUser;
 
+  const [title, updateTitle] = useState(null);
+  const [errorMessage, updateErrorMessage] = useState(null);
+
   return (
 
     <React.Fragment>
@@ -19,7 +24,11 @@ const ApplicationViews = (props) => {
         return <Login setUser={setUser} {...props} />
       }}
       />
-
+      <Route path="/registration" render={props => {
+        return <RegistrationForm setUser={setUser} showError={updateErrorMessage} updateTitle={updateTitle} {...props} />
+      }}
+      />
+            
       <Route
         exact path="/" render={props => {
           if (hasUser) {
@@ -37,7 +46,7 @@ const ApplicationViews = (props) => {
           return <Redirect to="/login" />
         }
       }} />
-
+<AlertComponent errorMessage={errorMessage} hideError={updateErrorMessage}/>
     </React.Fragment>
   );
 };

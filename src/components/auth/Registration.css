@@ -1,0 +1,28 @@
+
+.loginText {
+    color: #007bff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.form-group {
+    display: block;
+    margin: 1vh 0 .5vh 0;
+}
+ 
+.mt-2 {
+    margin: 0 0 .5vh 0;
+}
+
+.btn-primary {
+    
+    margin-right: auto;
+}
+.successMessage {
+    color: green;
+    font-weight: bold;
+}
+
+.form__registration__buttons {
+    display: grid;
+}

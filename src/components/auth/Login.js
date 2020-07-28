@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Login = (props) => {
     const [ credentials, setCredentials ] = useState({ email: "", password: "" });
+    
     
     // Update state whenever an input field is edited
     const handleFieldChange = (evt) => {
@@ -42,10 +44,13 @@ return (
             required="" />
           <label htmlFor="inputPassword">Password</label>
 
-          <input type="checkbox" isSelected="localCreds" value="localCreds" id="localCreds" onChange={handleFieldChange}/>
+          <input type="checkbox" value="localCreds" id="localCreds" onChange={handleFieldChange}/>
           <label htmlFor="localCreds">Remember Me</label>
         </div>
         <button type="submit">Sign in</button>
+        <Link to={`/registration`}>
+              <button>Register New User</button>
+            </Link>
         </fieldset>
     </form>
     );
