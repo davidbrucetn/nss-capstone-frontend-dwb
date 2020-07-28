@@ -1,10 +1,28 @@
-import apiKeys from "./Settings.js"
-const jsonDB = "http://localhost:5002"
+import { apiKeys, jsonDB } from "./Settings.js"
 
 export default {
     
-    getAnything(myParam) {
-        return myParam
+   postObject(newObjEntry, basetable) {
+        return fetch(`${jsonDB}/${basetable}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(newObjEntry)})
+            .then((response) => {
+              return response.json();
+                })
+    },
+    deleteObject(id, basetable) {
+        return fetch(`${jsonDB}/${basetable}/${id}`, {
+            method: "DELETE"})
+            .then((response) => {
+                return response.json();
+                  })
+    },
+    getUserbyEmail(emailAddress) {
+        return fetch(`${jsonDB}/users?email=${emailAddress}`)
+        .then(response => response.json())
     },
     getAllUsers() {
         return fetch(`${jsonDB}/users`)
