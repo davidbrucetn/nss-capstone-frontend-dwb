@@ -1,31 +1,59 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
+import { withRouter } from "react-router-dom";
 import { Link } from "react-router-dom";
+import APIManager from "../../modules/APIManager"
 
 const Login = (props) => {
     const [ credentials, setCredentials ] = useState({ email: "", password: "" });
-    
-    
-    // Update state whenever an input field is edited
-    const handleFieldChange = (evt) => {
-        const stateToChange = { ...credentials };
-        stateToChange[evt.target.id] = evt.target.value;
-        setCredentials(stateToChange);
-    };
+    const [ alertmsg, setAlert ] = useState("");
+    const [ users, setUsers ] = useState([])
+    let userMatch = false;
+    let passwordMatch = false;
 
-    const handleLogin = (e) => {
-        e.preventDefault();
-        /*
-            For now, just store the email and password that
-            the customer enters into session storage.
-        */
-        if (document.getElementById("localCreds").checked === true) {
-            props.setUser(credentials,"local");
-        } else {
-            props.setUser(credentials,"session")
+        // Update state whenever an input field is edited
+        const handleFieldChange = (evt) => {
+            const stateToChange = { ...credentials };
+            stateToChange[evt.target.id] = evt.target.value;
+            setCredentials(stateToChange);
         };
+
+        const handleLogin = (e) => {
+            
+        e.preventDefault();
+            
+        users.forEach(user => {
+            if (user.email === credentials.email) {
+                userMatch = true;
+                if (user.password === credentials.password) {
+                    passwordMatch = true;
+                    if (document.getElementById("localCreds").checked === true) {
+                        props.setUser(credentials,"local");
+                    } else {
+                        props.setUser(credentials,"session")
+                    }; //end credential storage type if
+                    props.history.push("/");
+                } //End password
+            } //End user email
+        }); //end user array
+            
+
+        if (userMatch === false) { setAlert("User email not found") } 
+        if (userMatch === true && passwordMatch === false) { setAlert("User password incorrect") }
+            
+        }; //end handleLogin
     
-        props.history.push("/");
-    }
+    useEffect(()=>{
+        APIManager.getAllUsers()
+                .then(response => {
+                    setUsers(response)
+                })
+        if (alertmsg !== null) {
+            props.showError(alertmsg)
+        }
+        
+    },[props,alertmsg])
+
+    
 
 return (
     <form onSubmit={handleLogin}>
@@ -55,4 +83,4 @@ return (
     </form>
     );
 };
-export default Login;
+export default withRouter(Login);
