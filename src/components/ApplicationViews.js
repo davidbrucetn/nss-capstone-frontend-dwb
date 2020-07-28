@@ -21,7 +21,7 @@ const ApplicationViews = (props) => {
     <React.Fragment>
 
       <Route path="/login" render={props => {
-        return <Login setUser={setUser} {...props} />
+        return <Login setUser={setUser} showError={updateErrorMessage} updateTitle={updateTitle} {...props} />
       }}
       />
       <Route path="/registration" render={props => {
@@ -46,7 +46,7 @@ const ApplicationViews = (props) => {
           return <Redirect to="/login" />
         }
       }} />
-<AlertComponent errorMessage={errorMessage} hideError={updateErrorMessage}/>
+      <AlertComponent errorMessage={errorMessage} hideError={updateErrorMessage}/>
     </React.Fragment>
   );
 };

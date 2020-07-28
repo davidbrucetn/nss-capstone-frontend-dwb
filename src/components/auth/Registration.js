@@ -8,14 +8,12 @@ import APIManager from '../../modules/APIManager';
 
 function RegistrationForm(props) {
 
-    const [users, setUsers] = useState([])
     const [ credentials, setCredentials ] = useState({ email: "", password: "", confirmPassword: "",  successMessage: null });
 
     const handleFieldChange = (event) => {
         
         const stateToChange = { ...credentials };
         stateToChange[event.target.id] = event.target.value;
-        console.log(event.target.value)
         setCredentials(stateToChange);
     }
 
@@ -24,11 +22,12 @@ function RegistrationForm(props) {
             props.showError(null);
 
             APIManager.getAllUsers()
-            .then(response => {
-                setUsers(response)
-               if (users.find(user => user.email === credentials.email) ) {
+            .then(users => {
+               if ( (users.some(user => user.email === credentials.email)) === true ) {
+                   console.log("Found email")
                 props.showError('This email has already been registered')  
                } else {
+
                     const newUserObj={
                         "email": credentials.email,
                         "password": credentials.password,
