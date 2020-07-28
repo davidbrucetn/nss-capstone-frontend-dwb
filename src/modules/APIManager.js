@@ -1,11 +1,15 @@
 import apiKeys from "./Settings.js"
+const jsonDB = "http://localhost:5002"
 
 export default {
     
     getAnything(myParam) {
         return myParam
     },
-
+    getAllUsers() {
+        return fetch(`${jsonDB}/users`)
+                .then(response => response.json())
+    },
     getTripAdvisorListByLocation(locationId,filterCodes) {
         let diningOptions = ""
         if ( filterCodes > 0 ) {
@@ -25,10 +29,24 @@ export default {
         .then((response) => {return response.json()})
         
           
+    },
+    getTripAdvisorDetails(locationId) {
+       
+        return fetch(`https://tripadvisor1.p.rapidapi.com/restaurants/get-details?location_id=${locationId}&lang=en_US&currency=USD`, {
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-host": "tripadvisor1.p.rapidapi.com",
+                "x-rapidapi-key": `${apiKeys.rapidapiTripAdvisor}`
+            }
+        })
+        .then((response) => {return response.json()})
+        
+          
+    },
+    getDummyList() {
+        return fetch(`${jsonDB}/dummy`)
+                .then(response => response.json()) 
     }
 }
 
-function newFunction() {
-    from; "./Settings.js"
-}
 
