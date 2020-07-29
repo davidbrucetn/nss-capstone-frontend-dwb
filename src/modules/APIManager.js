@@ -20,6 +20,14 @@ export default {
                 return response.json();
                   })
     },
+    getCollection(userId) {
+        return fetch(`${jsonDB}/collection?userId=${userId}&_embed=ratings&_expand=user`)
+        .then(response => response.json())
+    },
+    getCollectionObject(collectionId,userId) {
+        return fetch(`${jsonDB}/collection/${collectionId}?userId=${userId}&_embed=ratings&_expand=user`)
+        .then(response => response.json())
+    },
     getUserbyEmail(emailAddress) {
         return fetch(`${jsonDB}/users?email=${emailAddress}`)
         .then(response => response.json())
@@ -64,7 +72,16 @@ export default {
     getDummyList() {
         return fetch(`${jsonDB}/dummy`)
                 .then(response => response.json()) 
-    }
+    },
+    update(editedObject,basetable) {
+        return fetch(`${jsonDB}/${basetable}/${editedObject.id}`, {
+          method: "PUT",                    
+          headers: {
+              "Content-Type": "application/json"
+          },
+          body: JSON.stringify(editedObject)
+        }).then(response => response.json())
+      }
 }
 
 

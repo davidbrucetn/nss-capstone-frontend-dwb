@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import APIManager from "../../modules/APIManager"
 
 const Login = (props) => {
-    const [ credentials, setCredentials ] = useState({ email: "", password: "" });
+    const [ credentials, setCredentials ] = useState({ email: "", password: "", id: "" });
     const [ alertmsg, setAlert ] = useState("");
     const [ users, setUsers ] = useState([])
     let userMatch = false;
@@ -26,6 +26,7 @@ const Login = (props) => {
                 userMatch = true;
                 if (user.password === credentials.password) {
                     passwordMatch = true;
+                    credentials.id = user.id;
                     if (document.getElementById("localCreds").checked === true) {
                         props.setUser(credentials,"local");
                     } else {
@@ -47,7 +48,7 @@ const Login = (props) => {
                 .then(response => {
                     setUsers(response)
                 })
-        if (alertmsg !== null) {
+        if (alertmsg !== null && alertmsg !== "") {
             props.showError(alertmsg)
         }
         
