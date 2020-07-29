@@ -7,6 +7,7 @@ import AlertComponent from "./auth/AlertComponent"
 import Home from "./home/Home";
 import RestaurantList from "./restaurant/RestaurantList"
 import RestaurantDetail from "./restaurant/RestaurantDetails"
+import CollectionList from "./collection/CollectionList";
 
 const ApplicationViews = (props) => {
 
@@ -42,6 +43,14 @@ const ApplicationViews = (props) => {
       <Route exact path="/restaurant/:locationId(\d+)" render={props => {
         if (hasUser) {
           return <RestaurantDetail locationId={parseInt(props.match.params.locationId)} restaurant={props.restaurant} {...props} />
+        } else {
+          return <Redirect to="/login" />
+        }
+      }} />
+      <Route exact path="/collection" render={props => <CollectionList />} />
+      <Route exact path="/collection/:id(\d+)" render={props => {
+        if (hasUser) {
+          return <RestaurantDetail locationId={parseInt(props.match.params.id)} restaurant={props.restaurant} {...props} />
         } else {
           return <Redirect to="/login" />
         }

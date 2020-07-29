@@ -27,11 +27,19 @@ const NavBar = (props) => {
             ? 
           <li>
             <NavLink className="nav-link" activeClassName="selected" exact to="/restaurant">
-              Restaurants
+              Find Restaurants
             </NavLink>
           </li> 
           : null }
           
+          {props.hasUser
+            ? 
+          <li>
+            <NavLink className="nav-link" activeClassName="selected" exact to="/collection">
+              Your Collection
+            </NavLink>
+          </li> 
+          : null }
                    
            {props.hasUser
             ?<li>

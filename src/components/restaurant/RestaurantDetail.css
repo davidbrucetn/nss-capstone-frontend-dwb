@@ -3,11 +3,112 @@
     margin: 10px auto;
   }
 
+  .container__details {
+    display: flex;
+    flex-flow: column wrap;
+    margin: 1em;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    border-radius: 5px;
+
+  }
+
+  .container__details__content {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: flex-start;
+    padding: 0 1em;
+  }
+
+.container__details__content__hours {
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-start;
+  text-align: justify;
+}
+
+.container__details__features {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+}
+
+.container__details__buttons {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-evenly;
+
+}
+
   .div__detail {
     margin-top: 1em;
   }
+.card__detail__features {
+  display: flex;
+  flex-flow: row wrap;
+}
 
 button:disabled,
 button:disabled:hover {
   background-color: lightgray;
+}
+
+fieldset {
+  max-width: 40em;
+  padding: 4px;
+  margin: 2em auto;
+  border: 0 none;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  border-radius: 5px;
+  background: aliceblue;
+}
+
+fieldset input, fieldset button, fieldset select{
+  box-sizing: border-box;
+  padding: .2em .4em;
+  margin: .2em 0;
+  outline: none;
+  box-shadow: none;
+}
+
+fieldset button {
+  max-width: 9em;
+  padding: .5em;
+  margin: .3em auto;
+  background-color: cornflowerblue;
+  border: none;
+  color: cornsilk;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  border-radius: 2px;
+  width: 100%;
+  cursor: pointer;
+}
+
+fieldset label {
+  box-sizing: border-box;
+  user-select: none;
+  cursor: pointer;
+  text-align: right;
+}
+fieldset input:focus + label {
+  color: #933;
+}
+
+fieldset .formgrid {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: left;
+}
+
+
+fieldset .alignRight {
+  text-align: right;
+}
+
+input, label {
+  display:block;
 }
