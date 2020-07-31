@@ -1,5 +1,10 @@
 .App {
+  display: flex;
+  
+  width: 100%;
+  margin: 0;
   text-align: center;
+  margin: 0;
 }
 
 .App-logo {
@@ -35,6 +40,24 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+
+
+.container__app__left {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 10%;
+  margin: 0;
+  background-color: lightslategray;
+}
+
+.container__app__right {
+  display: flex;
+  flex-flow: column nowrap;
+  flex-grow: 1;
+  
+  background-color: lightsteelblue;
 }
 
 .section-content {

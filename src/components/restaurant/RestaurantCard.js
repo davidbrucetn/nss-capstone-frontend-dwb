@@ -3,10 +3,16 @@ import { Link } from "react-router-dom";
 
 const RestaurantCard = (props) => {
 
+
+
     let smallPhoto= props.restaurant.photo.images.small.url
     const pictureHTML = (smallPhoto === null || smallPhoto === "") ? "":<img src={props.restaurant.photo.images.small.url} alt={props.restaurant.name} />
 
     const addr2 = (props.restaurant.address_obj.street2 !==null && props.restaurant.address_obj.street2 !== "") ? (<p> {props.restaurant.address_obj.street2} </p>):null
+
+    
+
+    
   
   
   return (
@@ -31,7 +37,7 @@ const RestaurantCard = (props) => {
               <p>{props.restaurant.address_obj.city}, {props.restaurant.address_obj.state}  {props.restaurant.address_obj.postalcode}</p>
             </address>
             <p>Phone:  {props.restaurant.phone}</p>
-            <Link to={`/restaurant/${props.restaurant.location_id}`}>
+            <Link to={`/restaurant/${props.restaurant.location_id}/details`}>
               <button>Details</button>
             </Link>
       </div>

@@ -20,6 +20,13 @@ export default {
                 return response.json();
                   })
     },
+    deleteRating(ratingId) {
+        return fetch(`${jsonDB}/ratings/${ratingId}`, {
+            method: "DELETE"})
+            .then((response) => {
+                return response.json();
+                  })
+    },
     getCollection(userId) {
         return fetch(`${jsonDB}/collection?userId=${userId}&_embed=ratings&_expand=user`)
         .then(response => response.json())
