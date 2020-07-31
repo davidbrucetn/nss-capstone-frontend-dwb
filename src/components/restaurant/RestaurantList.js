@@ -9,14 +9,14 @@ const RestaurantList = (props) => {
 
   const getRestaurants = () => {
 
-    const filters = [ { filter: "Outdoor Seating", code: 1603}, { filter: "Delivery", code: 10600}, {filter: "Takeout", code: 10601}]
-    const locations = [ {city: "Franklin", locationId: "5562736"},{city: "Nashville", locationId: "55229"} ]
-    const locationFind = locations.splice(locations.findIndex(location => location.city === "Nashville"), 1)
+    // const filters = [ { filter: "Drive-thru", code: "20992"},{ filter: "Outdoor Seating", code: 1603}, { filter: "Delivery", code: 10600}, {filter: "Takeout", code: 10601}]
+    // const locations = [ {city: "Franklin", locationId: "5562736"},{city: "Nashville", locationId: "55229"} ]
+    // const locationFind = locations.splice(locations.findIndex(location => location.city === "Nashville"), 1)
 
     
     
     
-    let filterCodes = filters;
+    // let filterCodes = filters;
     // After the data comes back from the API, we
     //  use the setOwners function to update state
     

@@ -1,10 +1,12 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { NavLink as RRNavLink, withRouter  } from "react-router-dom";
 import { FaHome } from "react-icons/fa"
-import Home from "../home/Home"
+// import RestaurantSearch from "../restaurant/RestaurantSearch"
 import 'bootstrap/dist/css/bootstrap.min.css'; 
-import "./NavBarDemo.css"
+import "./NavBar.css"
 import {
+    Card,
+    CardBody,
     Collapse,
     Navbar,
     NavbarToggler,
@@ -15,10 +17,13 @@ import {
     DropdownToggle,
     DropdownMenu,
     DropdownItem,
+    NavbarBrand,
+    UncontrolledCollapse,
+    CardText
 } from 'reactstrap';
-const NavbarDemo = (props) => {
+const NavbarMenu = (props) => {
 
-    let navKey=0;
+    
   
     const handleLogout = () => {
       props.clearUser();
@@ -28,20 +33,22 @@ const NavbarDemo = (props) => {
     
         return (
             <div>
-                <Navbar className="faded navbar" color="faded" light expand="xs">NavBar
+                <Navbar className="faded navbar" color="faded" light expand="xs">
+
                     <NavbarToggler />
                     <Collapse navbar>
                         <Nav navbar>
+                            <NavbarBrand>
+                            <img
+                                src={require("./images/smallLogo.png")}
+                                width="30"
+                                height="30"
+                                className="d-inline-block align-top"
+                                alt="React Bootstrap logo"
+                            />
+                            </NavbarBrand>
                             <NavItem>
                                 <NavLink tag={RRNavLink} className="nav-link" activeClassName="selected" exact to="/"><FaHome /></NavLink>
-                            </NavItem>
-
-                            <NavItem>
-                             {props.hasUser
-                                ? <span className="nav-link" onClick={handleLogout}> Logout </span>
-                                :  
-                                <NavLink tag={RRNavLink} className="nav-link" to="/login"> Login </NavLink>
-                                }
                             </NavItem>
 
                             {props.hasUser ? 
@@ -87,6 +94,27 @@ const NavbarDemo = (props) => {
                                 </DropdownMenu>
                             </UncontrolledDropdown>
                             : null }
+                            
+                            <NavItem> <span className="nav-link" id="toggler" > Collapse </span></NavItem>
+                            <UncontrolledCollapse toggler="#toggler">  
+                                        <Card className="card__search">  
+                                         <CardBody>  
+                                          
+                                          <CardText>
+                                              asdfasd lasjdfl;asjdf alsdjf;asljf;sfdlj
+                                              {/* <RestaurantSearch /> */}
+                                              </CardText>
+                                         </CardBody>  
+                                        </Card>  
+                                </UncontrolledCollapse> 
+
+                            <NavItem>
+                             {props.hasUser
+                                ? <span className="nav-link" onClick={handleLogout}> Logout </span>
+                                :  
+                                <NavLink tag={RRNavLink} className="nav-link" to="/login"> Login </NavLink>
+                                }
+                            </NavItem>
                         </Nav>
                     </Collapse>
                 </Navbar>
@@ -95,4 +123,4 @@ const NavbarDemo = (props) => {
         )
 }
 
-export default withRouter(NavbarDemo)
+export default withRouter(NavbarMenu)

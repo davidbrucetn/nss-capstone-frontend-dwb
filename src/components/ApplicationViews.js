@@ -14,7 +14,7 @@ const ApplicationViews = (props) => {
   const hasUser = props.hasUser;
   const setUser = props.setUser;
 
-  const [title, updateTitle] = useState(null);
+  const [ updateTitle] = useState(null);
   const [errorMessage, updateErrorMessage] = useState(null);
 
   return (
@@ -40,7 +40,7 @@ const ApplicationViews = (props) => {
         }}
       />
       <Route exact path="/restaurant" render={props => <RestaurantList />} />
-      <Route exact path="/restaurant/:locationId(\d+)" render={props => {
+      <Route exact path="/restaurant/:locationId(\d+)/details" render={props => {
         if (hasUser) {
           return <RestaurantDetail locationId={parseInt(props.match.params.locationId)} restaurant={props.restaurant} {...props} />
         } else {
@@ -48,7 +48,7 @@ const ApplicationViews = (props) => {
         }
       }} />
       <Route exact path="/collection" render={props => <CollectionList />} />
-      <Route exact path="/collection/:id(\d+)" render={props => {
+      <Route exact path="/collection/:id(\d+)/details" render={props => {
         if (hasUser) {
           return <RestaurantDetail locationId={parseInt(props.match.params.id)} restaurant={props.restaurant} {...props} />
         } else {

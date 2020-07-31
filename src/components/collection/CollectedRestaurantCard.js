@@ -1,14 +1,24 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import APIManager from "../../modules/APIManager"
 
 const CollectedRestaurantCard = (props) => {
 
     
 
-    let smallPhoto= props.restaurant.photo.images.small.url
-    const pictureHTML = (smallPhoto === null || smallPhoto === "") ? "":<img src={props.restaurant.photo.images.small.url} alt={props.restaurant.name} />
+  let smallPhoto= props.restaurant.photo.images.small.url
+  const pictureHTML = (smallPhoto === null || smallPhoto === "") ? "":<img src={props.restaurant.photo.images.small.url} alt={props.restaurant.name} />
 
-    const addr2 = (props.restaurant.address_obj.street2 !==null && props.restaurant.address_obj.street2 !== "") ? (<p> {props.restaurant.address_obj.street2} </p>):null
+  const addr2 = (props.restaurant.address_obj.street2 !==null && props.restaurant.address_obj.street2 !== "") ? (<p> {props.restaurant.address_obj.street2} </p>):null
+
+  const handleDelete = () => {
+    //invoke the delete function in Employee Mgr and re-direct to the emp list
+    const collectionId=props.restaurant.id;
+    
+    APIManager.deleteObject(collectionId,"collection").then(() =>
+    props.history.push("/collection")
+    );
+  };
 
   
   return (
@@ -33,12 +43,14 @@ const CollectedRestaurantCard = (props) => {
               <p>{props.restaurant.address_obj.city}, {props.restaurant.address_obj.state}  {props.restaurant.address_obj.postalcode}</p>
             </address>
             <p>Phone:  {props.restaurant.phone}</p>
-            <Link to={`/collection/${props.restaurant.id}`}>
+            <Link to={`/collection/${props.restaurant.id}/details`}>
               <button>Details</button>
             </Link>
+            <button type="button" onClick={handleDelete}>Delete</button>
+            
       </div>
     </div>
   );
 };
 
-export default CollectedRestaurantCard;
+export default withRouter(CollectedRestaurantCard);

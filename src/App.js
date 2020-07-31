@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 //Children Components
-import NavBar from "./components/nav/NavBar"
-import NavbarDemo from "./components/nav/Navbs"
+import NavbarMenu from "./components/nav/Navbs"
 import ApplicationViews from "./components/ApplicationViews"
 
 
@@ -38,8 +37,8 @@ const CovidDining = () => {
 
     return (
       <>
-        <NavbarDemo  hasUser={hasUser} clearUser={clearUser} />
-        {/* <NavBar hasUser={hasUser} clearUser={clearUser} /> */}
+        <NavbarMenu  hasUser={hasUser} clearUser={clearUser} />
+        
         <ApplicationViews hasUser={hasUser} setUser={setUser} />
       </>
     );

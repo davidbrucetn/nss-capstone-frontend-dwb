@@ -11,15 +11,15 @@ const CollectionList = (props) => {
 
   const getCollection = () => {
 
-    const filters = [ { filter: "Outdoor Seating", code: 1603}, { filter: "Delivery", code: ""}]
-    const locations = [ {city: "Franklin", locationId: "5562736"},{city: "Nashville", locationId: "55229"} ]
-    const locationFind = locations.splice(locations.findIndex(location => location.city === "Nashville"), 1)
+    // const filters = [ { filter: "Outdoor Seating", code: 1603}, { filter: "Delivery", code: ""}]
+    // const locations = [ {city: "Franklin", locationId: "5562736"},{city: "Nashville", locationId: "55229"} ]
+    // const locationFind = locations.splice(locations.findIndex(location => location.city === "Nashville"), 1)
 
     const activeUserId = Helper.getActiveUserId();
 
     
     
-    let filterCodes = filters;
+    // let filterCodes = filters;
     // After the data comes back from the API, we
     //  use the setOwners function to update state
     
