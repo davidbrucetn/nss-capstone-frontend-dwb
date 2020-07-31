@@ -17,7 +17,7 @@ const NavBar = (props) => {
       </h1>
       <nav>
         <ul className="container">
-          <li>
+          <li >
             <NavLink className="nav-link" activeClassName="selected" exact to="/">
               Home
             </NavLink>

@@ -2,6 +2,12 @@
 //Author: David Bruce
 
 export default {
+    dateConverter(suppliedDate) {
+        let date = suppliedDate.toString()
+        date = date.slice(0,10)
+        date = date.split("-")
+        return date = `${date[1]}-${date[2]}-${date[0]}`
+    },
     getActiveUserId() {
         const activeUserId = sessionStorage.getItem("credentials") === null ? JSON.parse(localStorage.getItem("credentials")).id :JSON.parse(sessionStorage.getItem("credentials")).id
         return activeUserId
@@ -23,6 +29,9 @@ export default {
     generateKey(pre) {
         const thisKey = `${ pre }_${ new Date().getTime() }`
         return thisKey;
+    },
+    testForArray(thisArray) {
+        return (typeof thisArray !== "undefined" && thisArray !== null )
     }
     
 }

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 //Children Components
 import NavBar from "./components/nav/NavBar"
+import NavbarDemo from "./components/nav/Navbs"
 import ApplicationViews from "./components/ApplicationViews"
 
 
@@ -37,7 +38,8 @@ const CovidDining = () => {
 
     return (
       <>
-        <NavBar hasUser={hasUser} clearUser={clearUser} />
+        <NavbarDemo  hasUser={hasUser} clearUser={clearUser} />
+        {/* <NavBar hasUser={hasUser} clearUser={clearUser} /> */}
         <ApplicationViews hasUser={hasUser} setUser={setUser} />
       </>
     );
