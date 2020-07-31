@@ -1,0 +1,13 @@
+#root > .card {
+    max-width: 400px;
+    margin: 10px auto;
+  }
+
+  .div__detail {
+    margin-top: 1em;
+  }
+
+button:disabled,
+button:disabled:hover {
+  background-color: lightgray;
+}

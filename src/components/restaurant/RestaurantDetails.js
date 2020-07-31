@@ -3,6 +3,8 @@ import { withRouter } from "react-router-dom";
 import APIManager from '../../modules/APIManager'
 import './RestaurantDetail.css'
 import Helper from "../../modules/Helper";
+import { ListGroup, ListItem } from "bootstrap"
+
 
 
 const RestaurantDetail = props => {
@@ -12,11 +14,11 @@ const RestaurantDetail = props => {
   const [ cuisine, setCuisine ]  = useState("")
   const [ operatingHours, setOperatingHours ] = useState([])
   const [ objResidence, setObjResidence ] = useState("")
-  const [ ratings, setRatings ] = useState({ rating: "", notes: "", collectionId: ""})
+  const [ ratings, setRatings ] = useState({ rating: "", notes: "", collectionId: restaurant.id})
+  const [ ratingsArray, setRatingsArray] = useState([])
   const [isLoading, setIsLoading] = useState(true);
-  const [ ratingsArray, setRatingsArray ] = useState([])
-  
 
+  const tempRatings = [];  
   const buttonArray = [];
   const activeUserId = Helper.getActiveUserId();
   
@@ -33,7 +35,7 @@ const RestaurantDetail = props => {
   };
 
   const handleEdit = (restaurantId) => {
-    APIManager.update(restaurantId,"restaurants")
+    APIManager.update(restaurant,"restaurants")
     .then(() => {
       props.history.push("/collection")
     })
@@ -63,6 +65,7 @@ const saveNotesRating = evt => {
   } else {
       setIsLoading(true);
       ratings.collectionId = restaurant.id
+      ratings.date = new Date()
       //create emp and redirect to list
       APIManager.postObject(ratings,"ratings")
       .then(() => props.history.push("/collection"))
@@ -97,23 +100,29 @@ const saveNotesRating = evt => {
           };
         }); //end week ranges
       } // end operating hours
-     
-            let tempRatingsArray = [];
-            restaurant.ratings.forEach(ratingEntry => {
-              tempRatingsArray.push(<li>Rating: {ratingEntry.rating}</li>)
-              tempRatingsArray.push(<li>Notes:  {ratingEntry.notes}</li>)
-            })
-            
-            setRatingsArray(tempRatingsArray)
-        
+      if (Helper.testForArray(restaurant.ratings)) {
+        if (restaurant.userId === activeUserId && Helper.testForArray(restaurant.ratings)) {
+
+            restaurant.ratings.forEach((ratingEntry) => {
+            tempRatings.push(<li key={ratingEntry.id.toString() + ratingEntry.date}><strong>Date: {Helper.dateConverter(ratingEntry.date)}</strong></li>)
+            tempRatings.push(<div>Rating: {ratingEntry.rating}</div>)
+            tempRatings.push(<div>Notes: {ratingEntry.notes}</div>)
+          })
+        } 
+      }
+      setRatingsArray(tempRatings)
       setOperatingHours(tempOpHours)       
       setAddr2((restaurant.address_obj.street2 !==null && restaurant.address_obj.street2 !== "") ? (<p> {restaurant.address_obj.street2} </p>):null)
       setIsLoading(false)  
   }
 
+  
+
+
+
   const buildButtonArray = () => {
     if (restaurant.userId === activeUserId ) {
-      buttonArray.push(<button type="button" key={`SaveChangesRestaurant${restaurant.id}`} disabled={isLoading} onClick={handleEdit}>Save Changes</button>)
+      buttonArray.push(<button type="button" key={`SaveChangesRestaurant${restaurant.id}`} disabled={isLoading} onClick={() => handleEdit(restaurant,"restaurants")}>Save Changes</button>)
       buttonArray.push(<button type="button" key={`DeleteRestaurant${restaurant.id}`} disabled={isLoading} onClick={handleDelete}>Delete</button>)
     } else {
       buttonArray.push(<button type="button"key={`SaveToCollection${restaurant.location_id}`}  disabled={isLoading} onClick={handleSave}>Save to Collection</button>)
@@ -128,7 +137,7 @@ const saveNotesRating = evt => {
         <form>
         <fieldset>
             <div className="formgrid">
-            <label htmlFor="rating">Rating: {ratings.rating} </label>
+            <label htmlFor="rating">Your Rating: {ratings.rating} </label>
                 <input
                     type="range"
                     onChange={handleFieldChange}
@@ -136,6 +145,7 @@ const saveNotesRating = evt => {
                     min="0"
                     max="5"
                     step=".5"
+                    defaultValue = "0"
                     placeholder="Your Rating"
                 />
                 <label htmlFor="notes">Your Notes</label>
@@ -166,14 +176,14 @@ const saveNotesRating = evt => {
       APIManager.getTripAdvisorDetails(locationId)
       .then(response => {
          setObjResidence("API")
-         generateDetail(response,objResidence)
+         generateDetail(response,"API")
       })
     } else {
 
       APIManager.getCollectionObject(locationId,activeUserId)
       .then(response => {
         setObjResidence("LOCAL")
-        generateDetail(response,objResidence)
+        generateDetail(response,"LOCAL")
       })
     }
   }
@@ -190,7 +200,6 @@ const saveNotesRating = evt => {
             {mediumPhoto}
           </picture>
       </div>
-      
       <div className="container__details__content">  
         <h3>Name: <span style={{ color: 'darkslategrey' }}><a href={restaurant.website} target="_blank" rel="noopener noreferrer">{restaurant.name}</a></span></h3>
         
@@ -202,24 +211,25 @@ const saveNotesRating = evt => {
             </address>
             <p>Phone:  {restaurant.phone}</p>
         </div>
+              
 
-        <div className="container__details____ratings">
+        <div key={"container__details__ratings" + restaurant.location_id } className="container__details__ratings">
           <p><strong>Rating</strong> {restaurant.rating}</p>
           <p><strong>Ranking</strong> {restaurant.ranking}</p>
           {cuisine}
           <p><strong>Open Now: </strong>{restaurant.open_now_text}</p>
-          {ratingsArray.map(ratingEntry => ratingEntry)}
+          {ratingsArray.map(ratingEntry => {return ratingEntry})}
         </div>
 
-        <div className="container__details__content__hours">
-          <h4>Operating Hours: </h4> 
+        <div key={"container__details__content__hours" + restaurant.location_id } className="container__details__content__hours">
+          <h4 >Operating Hours: </h4> 
           {operatingHours.map(timeSlot => { return timeSlot})}
         </div>
         {formFieldReturn()}
         
   
       </div>
-      <div className="container__details__buttons">
+      <div key={"container__details__buttons"} className="container__details__buttons">
         {buildButtonArray()}
       </div>
 
