@@ -3,13 +3,19 @@ import { useHistory, withRouter } from "react-router-dom";
 import APIManager from '../../modules/APIManager';
 import './RestaurantDetail.css';
 import Helper from "../../modules/Helper";
-import { AiOutlineEdit } from "react-icons/ai";
+import { AiOutlineEdit, AiOutlineSave } from "react-icons/ai";
 import { TiDeleteOutline } from "react-icons/ti";
+import { MdFavorite } from "react-icons/md"
+import { GrFavorite } from "react-icons/gr"
+import Checkbox from '@material-ui/core/Checkbox';
 
 
 
 
 const RestaurantDetail = (props) => {
+  
+  const [ ppeEnabled, setPPEEnabled ] = useState(false)
+  const [ ppeChecked, setPPEChecked ] = useState(false);
   const [restaurant, setRestaurant] = useState({ name: "", location_id: "" });
   const [ mediumPhoto, setMediumPhoto ] = useState("")
   const [ addr2, setAddr2 ] = useState("")
@@ -24,7 +30,17 @@ const RestaurantDetail = (props) => {
   const activeUserId = Helper.getActiveUserId();
 
   const history = useHistory();
+
   
+  
+const handlePPEChange = (evt) => {
+  
+  setPPEChecked(evt.target.checked)
+  document.getElementById("SaveThisEdit").classList.toggle("blueButton")
+  restaurant.ppe = evt.target.checked
+  setRestaurant(restaurant)
+}
+
   // Save Restaurant to User Collection
   const handleRestaurantSave = () => {
     let newRestaurantObj = {}
@@ -32,12 +48,13 @@ const RestaurantDetail = (props) => {
     newRestaurantObj.userId = activeUserId;
     setIsLoading(true);
     APIManager.postObject(newRestaurantObj,"collection").then(() =>
-      props.history.push("/restaurant")
+      props.history.push("/collection")
     );
   };
 
-  const handleEdit = (restaurantId) => {
-    APIManager.update(restaurant,"restaurants")
+  const handleEdit = () => {
+    
+    APIManager.update(restaurant,"collection")
     .then(() => {
       props.history.push("/collection")
     })
@@ -46,7 +63,8 @@ const RestaurantDetail = (props) => {
   // Delete Restaurant from User Collection
   const handleRestaurantDelete = () => {
     setIsLoading(true);
-    if (Helper.testForArray(restaurant.ratings)) {
+    
+    if (restaurant.ratings.length !== 0 ) {
       restaurant.ratings.map(ratingEntry => {
         return APIManager.deleteRating(ratingEntry.id)
         .then(()=> {
@@ -58,6 +76,7 @@ const RestaurantDetail = (props) => {
       
         
     } else {
+      
         APIManager.deleteObject(restaurant.id,"collection").then(() =>
           props.history.push("/collection")
         );
@@ -67,10 +86,10 @@ const RestaurantDetail = (props) => {
   const handleFieldChange = evt => {
     // stateToChange is previous keys/values in employee with spread (...)
     const stateToChange = { ...ratings };
-
     //key and value of new employee object, using helper to capitalize first letter if not experience
     stateToChange[evt.target.id] = (evt.target.value);
-    setRatings(stateToChange)
+    
+    if (evt.target.id === "notes" || evt.target.id ==="rating" ) {setRatings(stateToChange)}
 }; // End handleFieldChange
 
 const saveNotesRating = evt => {
@@ -130,6 +149,10 @@ const handleRatingCancel = (evt) => {
       
       setRestaurant(restaurant)
       setMediumPhoto((restaurant.photo.images.medium.url === null || restaurant.photo.images.medium.url === "") ? "":<img src={restaurant.photo.images.medium.url} alt={restaurant.name} />);
+      if (typePull === "LOCAL" ) { 
+        setPPEChecked(restaurant.ppe)
+            }
+
       (restaurant.cuisine[0].name !== undefined || restaurant.cuisine[0].name !== "" ) && setCuisine(<p><strong>Cuisine</strong> {restaurant.cuisine[0].name} </p>)
       let tempOpHours = [];
       // hours Math.floor(minutes / 60); minutes = minutes % 60;
@@ -161,6 +184,7 @@ const handleRatingCancel = (evt) => {
       
   }
 
+  
   const buildRatingsArray = () => {
     if (Helper.testForArray(restaurant.ratings)) {
       if (restaurant.userId === activeUserId && Helper.testForArray(restaurant.ratings)) {
@@ -169,14 +193,17 @@ const handleRatingCancel = (evt) => {
           ratingsArray.push(
             <div key={ratingEntry.id.toString() + ratingEntry.date} className="container__ratings__master">
               <div className="container__ratings__content">
-                <li ><strong>Date: {Helper.dateConverter(ratingEntry.date)}</strong></li>
+                <div className="container__ratings__header">
+                  <li><strong>Date: {Helper.dateConverter(ratingEntry.date)}</strong></li>
+                  <div className="container__ratings__buttons">
+                    <button type="button" key={`DeleteRating${ratingEntry.id}`} title="Delete" disabled={isLoading} onClick={() => handleRatingDelete(ratingEntry.id)}><TiDeleteOutline /></button>
+                    <button type="button" key={`EditRating${ratingEntry.id}`} title="Edit" disabled={isLoading} onClick={() => handleRatingEdit(ratingEntry)}><AiOutlineEdit /></button>
+                  </div>
+                </div>
                 <div>Rating: {ratingEntry.rating}</div>
                 <div>Notes: {ratingEntry.notes}</div>
               </div>
-              <div className="container__ratings__buttons">
-                  <button type="button" key={`DeleteRating${ratingEntry.id}`} disabled={isLoading} onClick={() => handleRatingDelete(ratingEntry.id)}><TiDeleteOutline /></button>
-                  <button type="button" key={`EditRating${ratingEntry.id}`} disabled={isLoading} onClick={() => handleRatingEdit(ratingEntry)}><AiOutlineEdit /></button>
-              </div>
+              
             </div>)
         })
       } 
@@ -184,14 +211,19 @@ const handleRatingCancel = (evt) => {
     return ratingsArray
   }
 
+  const updateRestaurant = () => {
+    setIsLoading(true)
+    setPPEEnabled(true)
+    setIsLoading(false)
+  }
 
 
   const buildButtonArray = () => {
     if (restaurant.userId === activeUserId ) {
-      buttonArray.push(<button type="button" key={`SaveChangesRestaurant${restaurant.id}`} disabled={isLoading} onClick={() => handleEdit(restaurant,"restaurants")}>Save Changes</button>)
-      buttonArray.push(<button type="button" key={`DeleteRestaurant${restaurant.id}`} disabled={isLoading} onClick={handleRestaurantDelete}>Delete</button>)
+      buttonArray.push(<button type="button" key={`SaveChangesRestaurant${restaurant.id}`} title="Save PPE Update" id="saveRestaurantEdits" disabled={isLoading} onClick={handleEdit}><AiOutlineSave id="SaveThisEdit"/> </button>)
+      buttonArray.push(<button type="button" key={`DeleteRestaurant${restaurant.id}`} disabled={isLoading} title="Delete from Collection" onClick={handleRestaurantDelete}><MdFavorite className="buttonCollectionDelete" /> </button>)
     } else {
-      buttonArray.push(<button type="button"key={`SaveToCollection${restaurant.location_id}`}  disabled={isLoading} onClick={handleRestaurantSave}>Save to Collection</button>)
+      buttonArray.push(<button type="button"key={`SaveToCollection${restaurant.location_id}`}  disabled={isLoading} onClick={handleRestaurantSave}><GrFavorite className="buttonCollectionSave" /> </button>)
     }
     return buttonArray
   }
@@ -261,6 +293,7 @@ const handleRatingCancel = (evt) => {
          setObjResidence("API")
          generateDetail(response,"API")
       })
+      .then(()=> setIsLoading(false)  )
     } else {
 
       APIManager.getCollectionObject(locationId,activeUserId)
@@ -302,6 +335,18 @@ const handleRatingCancel = (evt) => {
           <p><strong>Ranking</strong> {restaurant.ranking}</p>
           {cuisine}
           <p><strong>Open Now: </strong>{restaurant.open_now_text}</p>
+          
+          { (restaurant.userId === activeUserId) && 
+      <p><strong>Staff using masks/gloves/ppe? </strong> { (restaurant.ppe === false) ? "No  ":"Yes  "}
+      <button type="button" key={`EditRetaurant${restaurant.id}`} title="Edit" disabled={isLoading} onClick={updateRestaurant}><AiOutlineEdit /></button>
+      { (ppeEnabled ) &&
+        <Checkbox id="ppe" name="ppe" onChange={handlePPEChange} color="primary" title="PPE?" value={ppeChecked} checked={ppeChecked} />
+      }
+      
+    </p> }
+          <div key={"container__details__buttons"} className="container__details__buttons">
+            {buildButtonArray()}
+         </div>
           <div className="container__user__ratings">
             <div className="container__ratings__array">
               {buildRatingsArray()}
@@ -321,9 +366,7 @@ const handleRatingCancel = (evt) => {
         
   
       </div>
-      <div key={"container__details__buttons"} className="container__details__buttons">
-        {buildButtonArray()}
-      </div>
+      
 
     </div>
     :null

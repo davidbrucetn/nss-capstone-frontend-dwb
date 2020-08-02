@@ -42,7 +42,7 @@ const ApplicationViews = (props) => {
       <Route exact path="/restaurant" render={props => <RestaurantList />} />
       <Route exact path="/restaurant/:locationId(\d+)/details" render={props => {
         if (hasUser) {
-          return <RestaurantDetail locationId={parseInt(props.match.params.locationId)} restaurant={props.restaurant} {...props} />
+          return <RestaurantDetail locationId={parseInt(props.match.params.locationId)} restaurant={props.restaurant} {...props}  />
         } else {
           return <Redirect to="/login" />
         }

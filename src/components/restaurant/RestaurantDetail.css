@@ -7,11 +7,31 @@
     display: flex;
     flex-flow: column wrap;
     margin: 1em;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    border-radius: 5px;
+    box-shadow:0 4px 10px 0 rgba(7, 83, 182, 0.2),0 4px 20px 0 rgba(131, 5, 53, 0.19);
+    border-radius: 8px;
+    background-color: rgb(255, 255, 255);
 
   }
 
+  .container__details__buttons {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    margin-left: 1em;
+  
+  }
+
+  .container__details__buttons > button {
+    border-radius: 8px;
+    border: none;
+    background-color: inherit;
+    font-size: 1.5em;
+    margin: 0 1em 1em 0;
+  }
+
+  .buttonCollectionDelete {
+    color: #8c0303;
+  }
   .container__details__content {
     display: flex;
     flex-flow: column wrap;
@@ -32,12 +52,7 @@
   justify-content: flex-start;
 }
 
-.container__details__buttons {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-evenly;
 
-}
 
   .div__detail {
     margin-top: 1em;
@@ -53,7 +68,7 @@ button:disabled:hover {
 }
 
 fieldset {
-  max-width: 40em;
+  max-width: 60em;
   padding: 4px;
   margin: 2em auto;
   border: 0 none;
@@ -86,6 +101,10 @@ fieldset button {
   border-radius: 2px;
   width: 100%;
   cursor: pointer;
+}
+
+textarea {
+  width: 40vw;
 }
 
 fieldset label {
@@ -132,7 +151,8 @@ input, label {
   display: flex;
   flex-flow: column nowrap;
   width: 50%;
-  padding: 1vh 1vw;
+  padding: 1vh .1vw;
+  font-size: 1em;
   margin-right: 1vw;
   background-color: #ffe48b;
   border-radius: 8px;
@@ -154,14 +174,31 @@ input, label {
   border-radius: 8px;
 }
 
+.container__ratings__header {
+  display: flex;
+  flex-flow: row nowrap;
+  margin-bottom: 0;
+}
+
 .container__ratings__content {
   display: flex;
-  flex-flow: column nowrap;
+  flex-flow: column wrap;
+  justify-content: flex-start;
+  margin: 0 1em 1em 1em;
   width: 70%;
 }
 
+.container__ratings__header > li {
+  flex: 3;
+  list-style-type:none;
+  margin: 0;
+}
+
 .container__ratings__buttons {
-  flex-grow: 1;
+  flex: 1;
+  margin: 0;
+  padding: 0;
+
 }
 
 .hidden {
@@ -169,11 +206,15 @@ input, label {
 }
 
 .container__ratings__buttons > button {
-  font-size: 2vh;
-  margin: 0 1em;
+  font-size: 1.2em;
+  margin: 0 .2em;
   border-radius: 5px;
   background-color: inherit;
   color: #8c0303;
   border: none;
 
+}
+
+.blueButton {
+  color: blue;
 }
