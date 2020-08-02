@@ -11,7 +11,10 @@ LESS
 CSS */
 .navbar {
   background-color: #8c0303;
+  
 }
+
+
 .navbar .navbar-brand {
   color: #f2e1c2;
 }
@@ -33,6 +36,7 @@ CSS */
   color: #f2e1c2;
   border-radius: .25rem;
   margin: 0 0.25em;
+  
 }
 .navbar .navbar-nav .nav-link:not(.disabled):hover,
 .navbar .navbar-nav .nav-link:not(.disabled):focus {
@@ -159,3 +163,4 @@ CSS */
   margin-top: 5em;
   width: 10vw;
 }
+
