@@ -5,8 +5,6 @@ import { FaHome } from "react-icons/fa"
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import "./NavBar.css"
 import {
-    Card,
-    CardBody,
     Collapse,
     Navbar,
     NavbarToggler,
@@ -18,8 +16,6 @@ import {
     DropdownMenu,
     DropdownItem,
     NavbarBrand,
-    UncontrolledCollapse,
-    CardText
 } from 'reactstrap';
 const NavbarMenu = (props) => {
 
@@ -47,9 +43,11 @@ const NavbarMenu = (props) => {
                                 alt="React Bootstrap logo"
                             />
                             </NavbarBrand>
+                          
                             <NavItem>
                                 <NavLink tag={RRNavLink} className="nav-link" activeClassName="selected" exact to="/"><FaHome /></NavLink>
                             </NavItem>
+                            
 
                             {props.hasUser ? 
                             <UncontrolledDropdown nav inNavbar>
@@ -82,32 +80,24 @@ const NavbarMenu = (props) => {
                                         <DropdownItem tag={RRNavLink} className="nav-link" activeClassName="selected" exact to="/restaurant">
                                             All
                                         </DropdownItem>
-                                        <DropdownItem>
+                                        <DropdownItem tag={RRNavLink} className="nav-link" activeClassName="selected" exact to="/delivery">
                                             Delivery
                                         </DropdownItem>
-                                        <DropdownItem>
+                                        <DropdownItem  tag={RRNavLink} className="nav-link" activeClassName="selected" exact to="/drivethru">
                                             Drive-Thru
                                         </DropdownItem>
-                                        <DropdownItem>
+                                        <DropdownItem tag={RRNavLink} className="nav-link" activeClassName="selected" exact to="/outdoor">
                                             Outdoor Seating
+                                        </DropdownItem>
+                                        <DropdownItem  tag={RRNavLink} className="nav-link" activeClassName="selected" exact to="/takeout">
+                                            Take Out
                                         </DropdownItem>
                                 </DropdownMenu>
                             </UncontrolledDropdown>
                             : null }
                             
-                            <NavItem> <span className="nav-link" id="toggler" > Collapse </span></NavItem>
-                            <UncontrolledCollapse toggler="#toggler">  
-                                        <Card className="card__search">  
-                                         <CardBody>  
-                                          
-                                          <CardText>
-                                              asdfasd lasjdfl;asjdf alsdjf;asljf;sfdlj
-                                              {/* <RestaurantSearch /> */}
-                                              </CardText>
-                                         </CardBody>  
-                                        </Card>  
-                                </UncontrolledCollapse> 
-
+                          
+                                                        
                             <NavItem>
                              {props.hasUser
                                 ? <span className="nav-link" onClick={handleLogout}> Logout </span>
