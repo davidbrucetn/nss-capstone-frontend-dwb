@@ -15,21 +15,21 @@ import { Checkbox as RestaurantCheckbox } from '@material-ui/core';
 
 
 const RestaurantDetail = (props) => {
-  
+  const [isLoading, setIsLoading] = useState(true);
+  const [restaurant, setRestaurant] = useState({ name: "", location_id: "" });
   const [ editEnabled, setEditEnabled ] = useState(false)
   const [ ppeChecked, setPPEChecked ] = useState(false);
   const [ deliveryChecked, setDeliveryChecked ] = useState(false)
   const [ drivethruChecked, setDrivethruChecked ] = useState(false)
   const [ outdoorChecked, setOutdoorChecked ] = useState(false)
   const [ takeoutChecked, setTakeoutChecked ] = useState(false)
-  const [restaurant, setRestaurant] = useState({ name: "", location_id: "" });
   const [ mediumPhoto, setMediumPhoto ] = useState("")
   const [ addr2, setAddr2 ] = useState("")
   const [ cuisine, setCuisine ]  = useState("")
   const [ operatingHours, setOperatingHours ] = useState([])
   const [ objResidence, setObjResidence ] = useState("")
   const [ ratings, setRatings ] = useState({ rating: "", notes: "", collectionId: restaurant.id})
-  const [isLoading, setIsLoading] = useState(true);
+  
 
   const ratingsArray = [];  
   const buttonArray = [];
@@ -65,16 +65,19 @@ const handleOptionChange = (evt) => {
     newRestaurantObj = restaurant;
     newRestaurantObj.userId = activeUserId;
     setIsLoading(true);
-    APIManager.postObject(newRestaurantObj,"collection").then(() =>
-      props.history.push("/collection")
-    );
+    
+    APIManager.postObject(newRestaurantObj,"collection")
+    .then(() => {
+     
+        props.history.push(`/collection`)
+      });
   };
 
   const handleEdit = () => {
     setIsLoading(true)
     APIManager.update(restaurant,"collection")
     .then(() => {
-      props.history.push(`/collection`)
+      props.history.push(`/collection/${props.match.params.state}/${props.match.params.city}/${restaurant.id}/details`)
     })
   }
 
@@ -87,7 +90,7 @@ const handleOptionChange = (evt) => {
         return APIManager.deleteRating(ratingEntry.id)
         .then(()=> {
           APIManager.deleteObject(restaurant.id,"collection").then(() =>
-          props.history.push("/collection")
+          props.history.push(`/collection/${props.match.params.state}/${props.match.params.city}`)
           );    
         })
       })
@@ -96,7 +99,7 @@ const handleOptionChange = (evt) => {
     } else {
       
         APIManager.deleteObject(restaurant.id,"collection").then(() =>
-          props.history.push("/collection")
+          props.history.push(`/collection/${props.match.params.state}/${props.match.params.city}`)
         );
     }
   };
@@ -118,13 +121,13 @@ const saveNotesRating = evt => {
       setIsLoading(true);
       if (ratings.id !== undefined) {
         APIManager.update(ratings,"ratings")
-        .then(() => props.history.push(`/collection`))
+        .then(() => props.history.push(`/collection/${props.match.params.state}/${props.match.params.city}/${restaurant.id}/details`))
       } else {
         ratings.collectionId = restaurant.id
         ratings.date = new Date()
         //create emp and redirect to list
         APIManager.postObject(ratings,"ratings")
-        .then(() => props.history.push(`/collection`))
+        .then(() => props.history.push(`/collection/${props.match.params.state}/${props.match.params.city}/${restaurant.id}/details`))
         }
       }
       
@@ -134,7 +137,7 @@ const saveNotesRating = evt => {
 const handleRatingDelete = (ratingId) => {
   setIsLoading(true);
       APIManager.deleteRating(ratingId)
-      .then(() => props.history.push(`/collection`))
+      .then(() => props.history.push(`/collection/${props.match.params.state}/${props.match.params.city}/${restaurant.id}/details`))
  
 };
 
@@ -155,16 +158,18 @@ const handleRatingCancel = (evt) => {
   
   setIsLoading(true)
   
-  // history.push(`/collection/${restaurant.id}/details`)
-  history.push(`/collection`)
+  history.push(`/collection/${props.match.params.state}/${props.match.params.city}/${restaurant.id}/details`)
+  // history.push(`/collection`)
 
  
 }
 
 
 
+
   const generateDetail = (restaurant,typePull) => {
       
+      setEditEnabled(false)
       setRestaurant(restaurant)
       setMediumPhoto((restaurant.photo.images.medium.url === null || restaurant.photo.images.medium.url === "") ? "":<img src={restaurant.photo.images.medium.url} alt={restaurant.name} />);
       if (typePull === "LOCAL" ) { 
@@ -320,7 +325,7 @@ const handleRatingCancel = (evt) => {
 
   useEffect(() => {
     const activeUserId = Helper.getActiveUserId()
-    
+        console.log("Detail Location", props.locationId)
         const APICall = (locationId) => {
     if (props.location.pathname.includes("/restaurant")) {
       APIManager.getTripAdvisorDetails(locationId)
@@ -341,7 +346,7 @@ const handleRatingCancel = (evt) => {
   }
     APICall(props.locationId)
 
-},[props.locationId,props.location.pathname])
+},[props.locationId,props.location.pathname,isLoading])
 
   return (
     (!isLoading) ? 

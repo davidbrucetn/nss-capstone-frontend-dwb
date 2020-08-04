@@ -16,16 +16,12 @@ export default {
         switch(filterCode) {
             case "20992":
               return "drivethru";
-              break;
             case "10603":
               return "outdoor"
-              break;
             case "10600":
               return "delivery"
-              break;
             case "10601":
                 return "takeout"
-                break;
             default:
               break;
           }

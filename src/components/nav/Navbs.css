@@ -60,14 +60,14 @@ CSS */
 .navbar .navbar-nav .nav-item.show .nav-link:hover,
 .navbar .navbar-nav .nav-item.show .nav-link:focus {
   color: #d5d95b;
-  background-color: #657ba6;
+  /* background-color: #657ba6; */
 }
 .navbar .navbar-toggle {
-  border-color: #657ba6;
+  /* border-color: #657ba6; */
 }
 .navbar .navbar-toggle:hover,
 .navbar .navbar-toggle:focus {
-  background-color: #657ba6;
+  /* background-color: #657ba6; */
 }
 .navbar .navbar-toggle .navbar-toggler-icon {
   color: #f2e1c2;
@@ -135,7 +135,7 @@ CSS */
   }
   .navbar-expand-lg .navbar-nav .show .dropdown-menu .dropdown-item.active {
     color: #d5d95b;
-    background-color: #657ba6;
+    /* background-color: #657ba6; */
   }
 }
 
@@ -149,7 +149,7 @@ CSS */
   }
   .navbar-expand-xl .navbar-nav .show .dropdown-menu .dropdown-item.active {
     color: #d5d95b;
-    background-color: #657ba6;
+    /* background-color: #657ba6; */
   }
 }
 
@@ -162,7 +162,7 @@ CSS */
 }
 .navbar-expand .navbar-nav .show .dropdown-menu .dropdown-item.active {
   color: #d5d95b;
-  background-color: #657ba6;
+  /* background-color: #657ba6; */
 }
 
 

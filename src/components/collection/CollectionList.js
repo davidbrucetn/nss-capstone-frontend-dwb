@@ -5,9 +5,17 @@ import CollectedRestaurantCard from "./CollectedRestaurantCard"
 import APIManager from "../../modules/APIManager";
 import Helper from "../../modules/Helper"
 
+
+
+
+
 const CollectionList = (props) => {
   // The initial state is an empty array
+  const [ diningType, setDiningType ] = useState("")
   const [collection, setCollection] = useState([]);
+
+  let textDiningType = "";
+  const filterCodes = [];
 
   const getCollection = () => {
 
@@ -16,7 +24,18 @@ const CollectionList = (props) => {
     // const locationFind = locations.splice(locations.findIndex(location => location.city === "Nashville"), 1)
 
     const activeUserId = Helper.getActiveUserId();
-
+    
+    if (props.diningOptions !== undefined) {
+        textDiningType = Helper.diningOptionMatch(props.diningOptions)
+        if (textDiningType !== "") {
+          filterCodes.push(props.diningOptions)
+          setDiningType(textDiningType)
+        }
+    } else {
+        const filterCode = { filter: "All", code: "all"}
+        filterCodes.push(filterCode)
+        setDiningType(filterCode)
+    }
     
     
     // let filterCodes = filters;

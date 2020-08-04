@@ -22,7 +22,7 @@ const CollectedRestaurantCard = (props) => {
         return APIManager.deleteRating(ratingEntry.id)
         .then(()=> {
           APIManager.deleteObject(props.restaurant.id,"collection").then(() =>
-          props.history.push("/collection")
+          props.history.push(`/collection/${props.match.params.state}/${props.match.params.city}`)
           );    
         })
       })
@@ -31,7 +31,7 @@ const CollectedRestaurantCard = (props) => {
     } else {
       
         APIManager.deleteObject(props.restaurant.id,"collection").then(() =>
-          props.history.push("/collection")
+          props.history.push(`/collection/${props.match.params.state}/${props.match.params.city}`)
         );
     }
   };
@@ -67,7 +67,7 @@ const CollectedRestaurantCard = (props) => {
               <p>Take Out: {Helper.returnYesNo(props.restaurant.takeout)}</p>
           
 
-            <Link to={`/collection/${props.restaurant.id}/details`}>
+            <Link to={`/collection/${props.match.params.state}/${props.match.params.city}/${props.restaurant.id}/details`}>
               <button><DetailsIcon title="Details" /></button>
             </Link>
             <button type="button" key={`DeleteRestaurant${props.restaurant.id}`} disabled={isLoading} title="Delete from Collection" onClick={handleDelete}><CollectionDeleteItem className="buttonCollectionDelete" /> </button>

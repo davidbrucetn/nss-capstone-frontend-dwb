@@ -1,4 +1,4 @@
-import { Route, Redirect } from "react-router-dom";
+import { Route, Redirect,withRouter } from "react-router-dom";
 import React, {useState} from "react";
 
 import RegistrationForm from "./auth/Registration"
@@ -40,22 +40,29 @@ const ApplicationViews = (props) => {
         }}
       />
       <Route exact path="/restaurant" render={props => <RestaurantList  {...props} />} />
-      <Route exact path="/delivery" render={props => <RestaurantList  diningOptions="10600" {...props} />} />
-      <Route exact path="/drivethru" render={props => <RestaurantList  diningOptions="20992" {...props} />} />
-      <Route exact path="/outdoor" render={props => <RestaurantList  diningOptions="10603" {...props} />} />
-      <Route exact path="/takeout" render={props => <RestaurantList  diningOptions="10601" {...props} />} />
+      <Route exact path="/restaurant/:state/:city" render={props => <RestaurantList  {...props} />} />
+      <Route exact path="/delivery/:state/:city" render={props => <RestaurantList  diningOptions="10600" {...props} />} />
+      <Route exact path="/drivethru/:state/:city" render={props => <RestaurantList  diningOptions="20992" {...props} />} />
+      <Route exact path="/outdoor/:state/:city" render={props => <RestaurantList  diningOptions="10603" {...props} />} />
+      <Route exact path="/takeout/:state/:city" render={props => <RestaurantList  diningOptions="10601" {...props} />} />
+
+      <Route exact path="/saveddelivery/:state/:city" render={props => <CollectionList  diningOptions="10600" {...props} />} />
+      <Route exact path="/saveddrivethru/:state/:city" render={props => <CollectionList  diningOptions="20992" {...props} />} />
+      <Route exact path="/savedoutdoor/:state/:city" render={props => <CollectionList  diningOptions="10603" {...props} />} />
+      <Route exact path="/savedtakeout/:state/:city" render={props => <CollectionList  diningOptions="10601" {...props} />} />
      
       
      
-      <Route exact path="/restaurant/:locationId(\d+)/details" render={props => {
+      <Route exact path="/restaurant/:state/:city/:locationId(\d+)/details" render={props => {
         if (hasUser) {
           return <RestaurantDetail locationId={parseInt(props.match.params.locationId)} restaurant={props.restaurant} {...props}  />
         } else {
           return <Redirect to="/login" />
         }
       }} />
-      <Route exact path="/collection" render={props => <CollectionList />} />
-      <Route exact path="/collection/:id(\d+)/details" render={props => {
+      <Route exact path="/collection" render={props => <CollectionList {...props}/>} />
+      <Route exact path="/collection/:state/:city" render={props => <CollectionList {...props}/>} />
+      <Route exact path="/collection/:state/:city/:id(\d+)/details" render={props => {
         if (hasUser) {
           return <RestaurantDetail locationId={parseInt(props.match.params.id)} restaurant={props.restaurant} {...props} />
         } else {
@@ -67,4 +74,4 @@ const ApplicationViews = (props) => {
   );
 };
 
-export default ApplicationViews;
+export default withRouter(ApplicationViews);

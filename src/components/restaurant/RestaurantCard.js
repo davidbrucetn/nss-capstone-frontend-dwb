@@ -27,7 +27,7 @@ const RestaurantCard = (props) => {
           return APIManager.deleteRating(ratingEntry.id)
           .then(()=> {
             APIManager.deleteObject(props.collection[0].id,"collection").then(() =>
-            props.history.push("/restaurant")
+            props.history.push(`${props.match.url}`)
             );    
           })
         })
@@ -36,7 +36,7 @@ const RestaurantCard = (props) => {
       } else {
         
           APIManager.deleteObject(props.collection[0].id,"collection").then(() =>
-            props.history.push("/restaurant")
+            props.history.push(`${props.match.url}`)
           );
       }
     };
@@ -55,7 +55,7 @@ const RestaurantCard = (props) => {
       newRestaurantObj[diningBooleanKey] = true;
       
       APIManager.postObject(newRestaurantObj,"collection").then(() =>
-        props.history.push("/restaurant")
+        props.history.push(`${props.match.url}`)
       );
     };
 
@@ -87,7 +87,16 @@ const RestaurantCard = (props) => {
               <p>{props.restaurant.address_obj.city}, {props.restaurant.address_obj.state}  {props.restaurant.address_obj.postalcode}</p>
             </address>
             <p>Phone:  {props.restaurant.phone}</p>
-            <Link to={`/${( props.collection[0] === undefined) ? `restaurant/${props.restaurant.location_id}`:`collection/${props.collection[0].id}`}/details`}>
+            { (props.collection[0] !== undefined) && 
+             <>
+              <p>Delivery: {Helper.returnYesNo(props.restaurant.delivery)}</p>
+              <p>Drive-Thru: {Helper.returnYesNo(props.restaurant.drivethru)}</p>
+              <p>Outdoor Dining: {Helper.returnYesNo(props.restaurant.outdoor)}</p>
+              <p>Take Out: {Helper.returnYesNo(props.restaurant.takeout)}</p>
+              </>
+            }
+            <hr/>
+            <Link to={`/${( props.collection[0] === undefined) ? `restaurant/${props.match.params.state}/${props.match.params.city}/${props.restaurant.location_id}`:`collection/${props.match.params.state}/${props.match.params.city}/${props.collection[0].id}`}/details`}>
               <button><DetailsIcon title="Details" /></button>
             </Link>
             {( props.collection[0] === undefined) ? <button title="Save to Colletion" type="button"key={`SaveToCollection${props.restaurant.location_id}`}  disabled={isLoading} onClick={handleRestaurantSave}><CollectionSaveitem className="buttonCollectionSave" /> </button> : <button type="button" key={`DeleteRestaurant${props.collection[0].id}`} disabled={isLoading} title="Delete from Collection" onClick={handleRestaurantDelete}><CollectionDeleteItem className="buttonCollectionDelete" /> </button>
