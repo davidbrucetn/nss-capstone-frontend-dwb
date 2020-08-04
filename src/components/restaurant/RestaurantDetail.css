@@ -1,3 +1,4 @@
+
 #root > .card {
     max-width: 400px;
     margin: 10px auto;
@@ -13,37 +14,121 @@
 
   }
 
+  .container__image__layout {
+    display: flex;
+    max-height: 30vh;
+    background-color: #657ba6;
+
+  }
+
+  .container__image__layout img {
+
+    height: 100%;
+    width: auto;
+  }
+
+  .container__picture {
+    flex: 2;
+    background-color: #8c0303;
+    box-shadow:0 4px 10px 0 rgba(7, 83, 182, 0.2),0 4px 20px 0 rgba(131, 5, 53, 0.19);
+    
+  }
+
+  .container__tinylink {
+    flex: 2;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: space-between;
+    align-self: center;
+    box-shadow:0 4px 10px 0 rgba(7, 83, 182, 0.2),0 4px 20px 0 rgba(131, 5, 53, 0.19);
+
+  }
+
   .container__details__buttons {
     display: flex;
     flex-flow: row nowrap;
     justify-content: flex-start;
-    margin-left: 1em;
+    font-size: 1.2em;
+    border-radius: 5px;
   
   }
 
   .container__details__buttons > button {
-    border-radius: 8px;
     border: none;
-    background-color: inherit;
+    background-color:inherit;
     font-size: 1.5em;
     margin: 0 1em 1em 0;
   }
 
+  
   .buttonCollectionDelete {
     color: #8c0303;
   }
+
+.container__details__options {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-items: flex-start;
+  margin-bottom: 0;
+}
+
+.container__details__content__location {
+  flex: 2;
+  margin-bottom: 0;
+
+}
+
+.container__options {
+  flex: 2;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+}
+
+
+.container__miscInfo {
+  margin: 1em 0 1em 0;
+}
+
   .container__details__content {
+    background-color: antiquewhite;
     display: flex;
     flex-flow: column wrap;
     justify-content: flex-start;
-    padding: 0 1em;
+    padding: 1em 1em 0 1em;
   }
 
+.container__hours__other {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
 .container__details__content__hours {
+  flex: 1;
   display: flex;
   flex-flow: column;
   justify-content: flex-start;
   text-align: justify;
+}
+
+
+.container__details__content__hours > h4 {
+  margin: 1em 0 1em 0;
+
+}
+
+.container__other {
+  flex: 2;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: first baseline;
+  text-align: justify;
+}
+
+.container__other > h4 {
+  margin: 1em 0 1em 0;
+
 }
 
 .container__details__features {
@@ -52,7 +137,14 @@
   justify-content: flex-start;
 }
 
-
+.button__edit__ppe  {
+  font-size: 1.2em;
+  margin: 0 .2em;
+  border-radius: 5px;
+  background-color: inherit;
+  color: #8c0303;
+  border: none;
+}
 
   .div__detail {
     margin-top: 1em;
@@ -142,6 +234,10 @@ input, label {
   display:block;
 }
 
+.restaurant__header {
+  margin: 0 0 1em 0;
+}
+
 
 .container__user__ratings {
   display: flex;
@@ -151,6 +247,7 @@ input, label {
   display: flex;
   flex-flow: column nowrap;
   width: 50%;
+  min-height: 20vh;
   padding: 1vh .1vw;
   font-size: 1em;
   margin-right: 1vw;
@@ -160,6 +257,7 @@ input, label {
   
 .container__ratings__form {
   flex-grow: 1;
+  min-height: 20vh;
   background-color: #ffe48b;
   border-radius: 8px;
   box-shadow:0 4px 10px 0 rgba(7, 83, 182, 0.2),0 4px 20px 0 rgba(131, 5, 53, 0.19);
@@ -205,7 +303,7 @@ input, label {
   display: none;
 }
 
-.container__ratings__buttons > button {
+button {
   font-size: 1.2em;
   margin: 0 .2em;
   border-radius: 5px;
@@ -217,4 +315,6 @@ input, label {
 
 .blueButton {
   color: blue;
+  font-size: 2em;
+  transition: all 0.8s
 }

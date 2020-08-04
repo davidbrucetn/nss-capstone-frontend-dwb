@@ -39,7 +39,14 @@ const ApplicationViews = (props) => {
           }
         }}
       />
-      <Route exact path="/restaurant" render={props => <RestaurantList />} />
+      <Route exact path="/restaurant" render={props => <RestaurantList  {...props} />} />
+      <Route exact path="/delivery" render={props => <RestaurantList  diningOptions="10600" {...props} />} />
+      <Route exact path="/drivethru" render={props => <RestaurantList  diningOptions="20992" {...props} />} />
+      <Route exact path="/outdoor" render={props => <RestaurantList  diningOptions="10603" {...props} />} />
+      <Route exact path="/takeout" render={props => <RestaurantList  diningOptions="10601" {...props} />} />
+     
+      
+     
       <Route exact path="/restaurant/:locationId(\d+)/details" render={props => {
         if (hasUser) {
           return <RestaurantDetail locationId={parseInt(props.match.params.locationId)} restaurant={props.restaurant} {...props}  />

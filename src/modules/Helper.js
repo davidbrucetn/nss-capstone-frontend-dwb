@@ -1,7 +1,38 @@
 //Helper Functions 
 //Author: David Bruce
 
+const filters = [ { filter: "Drive-thru", code: "20992"},{ filter: "Outdoor Seating", code: "10603"}, { filter: "Delivery", code: "10600"}, {filter: "Takeout", code: "10601"}]
+
+
 export default {
+    returnYesNo(booleanObjectValue) {
+        if (booleanObjectValue === true ) {
+            return "Yes"
+        } else {
+            return "No"
+        }
+    },
+    collectionDiningOptionBoolean(filterCode) {
+        switch(filterCode) {
+            case "20992":
+              return "drivethru";
+              break;
+            case "10603":
+              return "outdoor"
+              break;
+            case "10600":
+              return "delivery"
+              break;
+            case "10601":
+                return "takeout"
+                break;
+            default:
+              break;
+          }
+    },
+    diningOptionMatch(filterCode) {
+        return filters.find( ( {code }) => code === filterCode )
+    },
     dateConverter(suppliedDate) {
         let date = suppliedDate.toString()
         date = date.slice(0,10)

@@ -10,10 +10,21 @@ SASS
 LESS
 CSS */
 .navbar {
+
   background-color: #8c0303;
   
 }
 
+.container__search__form {
+  position: fixed;
+  bottom: 10;
+}
+
+.form__search {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+}
 
 .navbar .navbar-brand {
   color: #f2e1c2;
