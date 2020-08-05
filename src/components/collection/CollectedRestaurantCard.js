@@ -8,9 +8,23 @@ import Helper from "../../modules/Helper";
 
 const CollectedRestaurantCard = (props) => {
   const [ isLoading, setIsLoading ] = useState(false);
+
+  let smallPhoto = "";
+  let pictureHTML = "";
+ 
+  //set correct path based on props
+  let thisPath = "";
+  if (props.match.params.state === undefined ) { thisPath = `/collection`
+  } else { 
+      thisPath = `/collection/${props.match.params.state}/${props.match.params.city}` 
+  }
+
+  if (props.restaurant.photo !== undefined ) {
+    smallPhoto= props.restaurant.photo.images.small.url
+    pictureHTML = (smallPhoto === null || smallPhoto === "") ? "":
     
-  let smallPhoto= props.restaurant.photo.images.small.url
-  const pictureHTML = (smallPhoto === null || smallPhoto === "") ? "":<img className="card-img-top" src={props.restaurant.photo.images.small.url} alt={props.restaurant.name} />
+    <img className="card-img-top" src={props.restaurant.photo.images.small.url} alt={props.restaurant.name} />
+  }
 
   const addr2 = (props.restaurant.address_obj.street2 !==null && props.restaurant.address_obj.street2 !== "") ? (<p> {props.restaurant.address_obj.street2} </p>):null
 
@@ -21,17 +35,14 @@ const CollectedRestaurantCard = (props) => {
       props.restaurant.ratings.map(ratingEntry => {
         return APIManager.deleteRating(ratingEntry.id)
         .then(()=> {
-          APIManager.deleteObject(props.restaurant.id,"collection").then(() =>
-          props.history.push("/collection")
-          );    
+          APIManager.deleteObject(props.restaurant.id,"collection").then(() => {
+          props.history.push(thisPath)
+          });    
         })
       })
-      
-        
     } else {
-      
         APIManager.deleteObject(props.restaurant.id,"collection").then(() =>
-          props.history.push("/collection")
+          props.history.push(thisPath)
         );
     }
   };
@@ -39,21 +50,24 @@ const CollectedRestaurantCard = (props) => {
   
   return (
       (!isLoading) ?
-    <div className="card">
+    <div className="card-cd" >
         
-             <picture>
-              {pictureHTML}
-            </picture>
         
-      <div className="card-body">
-        
-      </div>   
-          <div className="card-title">
-            <h3 className="header__card__name">
-              <span className="card-restaurantName">{props.restaurant.name}</span>
-            </h3>
+        <picture >
+          <div className="card__image">
+                {pictureHTML}
           </div>
-
+        </picture>
+        
+      
+        <div className="card-body">
+        
+          
+            <h4 className="card-title">
+              <span className="card-restaurantName"><a href={props.restaurant.web_url} target="_blank">{props.restaurant.name}</a></span>
+            </h4>
+          
+          
           <div className="card-text">
               <address>
                 <p>{props.restaurant.address_obj.street1}</p>
@@ -61,17 +75,20 @@ const CollectedRestaurantCard = (props) => {
                 <p>{props.restaurant.address_obj.city}, {props.restaurant.address_obj.state}  {props.restaurant.address_obj.postalcode}</p>
               </address>
               <p>Phone:  {props.restaurant.phone}</p>
-              <p>Delivery: {Helper.returnYesNo(props.restaurant.delivery)}</p>
-              <p>Drive-Thru: {Helper.returnYesNo(props.restaurant.drivethru)}</p>
-              <p>Outdoor Dining: {Helper.returnYesNo(props.restaurant.outdoor)}</p>
-              <p>Take Out: {Helper.returnYesNo(props.restaurant.takeout)}</p>
+              <article className="article__diningOptions"  >
+                <p><strong>Delivery: </strong>{Helper.returnYesNo(props.restaurant.delivery)}</p>
+                <p><strong>Drive-Thru: </strong>{Helper.returnYesNo(props.restaurant.drivethru)}</p>
+                <p><strong>Outdoor Dining: </strong>{Helper.returnYesNo(props.restaurant.outdoor)}</p>
+                <p><strong>Take Out: </strong>{Helper.returnYesNo(props.restaurant.takeout)}</p>
+              </article>
           
+            </div> 
 
-            <Link to={`/collection/${props.restaurant.id}/details`}>
+            <Link to={`${thisPath}/${props.restaurant.id}/details`}>
               <button><DetailsIcon title="Details" /></button>
             </Link>
             <button type="button" key={`DeleteRestaurant${props.restaurant.id}`} disabled={isLoading} title="Delete from Collection" onClick={handleDelete}><CollectionDeleteItem className="buttonCollectionDelete" /> </button>
-          </div>
+        </div>
            
          
     </div>

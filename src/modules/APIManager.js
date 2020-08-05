@@ -1,4 +1,5 @@
 import { apiKeys, jsonDB } from "./Settings.js"
+import Helper from "./Helper"
 
 export default {
     
@@ -27,8 +28,22 @@ export default {
                 return response.json();
                   })
     },
+    getCollectionByLocationId(userId,location_id) {
+        return fetch(`${jsonDB}/collection?location_id=${location_id}&userId=${userId}&_embed=ratings&_expand=user`)
+        .then(response => response.json())
+    },
     getCollection(userId) {
         return fetch(`${jsonDB}/collection?userId=${userId}&_embed=ratings&_expand=user`)
+        .then(response => response.json())
+    },
+    getCollectionDiningOptions(userId,filterCode) {
+        let diningOption = "";
+        if (filterCode !== "all") {
+            diningOption = Helper.collectionDiningOptionBoolean(filterCode[0])
+            diningOption = diningOption + "=true"
+        } else { diningOption = "" }
+        
+        return fetch(`${jsonDB}/collection?userId=${userId}&${diningOption}&_embed=ratings&_expand=user`)
         .then(response => response.json())
     },
     getCollectionObject(collectionId,userId) {
@@ -43,16 +58,8 @@ export default {
         return fetch(`${jsonDB}/users`)
                 .then(response => response.json())
     },
-    getTripAdvisorListByLocation(locationId,filterCodes) {
-        let diningOptions = ""
-        if ( filterCodes > 0 ) {
-        filterCodes.forEach(filter => {
-            if (filter.code.length() > 0 ) {
-              diningOptions += `&restaurant_dining_options=${filter.code}`
-            }
-        }) } else { diningOptions = ""}
-
-        return fetch(`https://tripadvisor1.p.rapidapi.com/restaurants/list?restaurant_tagcategory_standalone=10591&lunit=km&restaurant_tagcategory=10591&limit=30&currency=USD&lang=en_US&location_id=${locationId}${diningOptions}`, {
+    getTripAdvisorLocationCode(cityStateObj) {
+        return fetch(`https://tripadvisor1.p.rapidapi.com/locations/search?location_id=1&limit=1&sort=relevance&offset=0&lang=en_US&currency=USD&units=km&query=${cityStateObj.city}%252C%20${cityStateObj.state}`, {
             "method": "GET",
             "headers": {
                 "x-rapidapi-host": "tripadvisor1.p.rapidapi.com",
@@ -60,6 +67,23 @@ export default {
             }
         })
         .then((response) => {return response.json()})
+        .catch(err => {
+	        return err;
+        });
+    },
+    getTripAdvisorListByLocation(locationId,filterCode) {
+        console.log(filterCode[0])
+        const diningOption = filterCode[0]
+        return fetch(`https://tripadvisor1.p.rapidapi.com/restaurants/list?restaurant_tagcategory_standalone=10591&lunit=km&restaurant_tagcategory=10591&limit=30&currency=USD&lang=en_US&restaurant_dining_options=${diningOption}&location_id=${locationId}`, {
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-host": "tripadvisor1.p.rapidapi.com",
+                "x-rapidapi-key": `${apiKeys.rapidapiTripAdvisor}`
+            }
+        })
+        .then((response) => {
+            return response.json()
+        })
         
           
     },

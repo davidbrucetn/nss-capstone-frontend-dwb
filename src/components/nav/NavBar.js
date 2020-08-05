@@ -40,7 +40,14 @@ const NavBar = (props) => {
             </NavLink>
           </li> 
           : null }
-                   
+           {props.hasUser
+            ?<li>
+            <span className="inline__search" ><input type="text" title="City, State"></input> </span>
+          </li>
+            :  <li>
+            <NavLink className="nav-link" to="/login"> Login </NavLink>
+          </li>}
+
            {props.hasUser
             ?<li>
             <span className="nav-link" onClick={handleLogout}> Logout </span>
