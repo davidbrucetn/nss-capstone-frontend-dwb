@@ -8,8 +8,6 @@ import Helper from "../../modules/Helper"
 const RestaurantList = (props) => {
   // The initial state is an empty array
   const [ isLoading, setIsLoading ] = useState(true);
-  const [ cityStateObj, setCityStateObj ] = useState({})
-  const [ taLocationID, setTALocationID] = useState("")
   const [ restaurants, setRestaurants ] = useState([]);
   const [ collection, setCollection ] = useState([])
   const [ diningType, setDiningType ] = useState("")
@@ -21,24 +19,18 @@ const RestaurantList = (props) => {
 
     const activeUserId = Helper.getActiveUserId();
     const filterCodes = [];
-    let location = {};
+    let TAlocation = {};
     const cityStateTemp = {
       city: props.match.params.city,
       state: props.match.params.state
     }
-    setCityStateObj(cityStateTemp)
-    
-    
 
-    // const locations = [ {city: "Franklin", locationId: "5562736"},{city: "Nashville", locationId: "55229"} ]
-    // const locationFind = locations.splice(locations.findIndex(location => location.city === "Nashville"), 1)
-    if (props.diningOptions !== undefined) {
+      if (props.diningOptions !== undefined) {
       textDiningType = Helper.diningOptionMatch(props.diningOptions)
 
       if (textDiningType !== "") {
         filterCodes.push(props.diningOptions)
         setDiningType(textDiningType)
-        
       }
     } else {
         const filterCode = { filter: "All", code: "all"}
@@ -47,38 +39,36 @@ const RestaurantList = (props) => {
     }
     
     if (props.match.params.city === undefined ) {
-       location.city = "Nashville";
-       location.state = "Tennessee"
+      TAlocation.city = "Nashville";
+      TAlocation.state = "Tennessee"
     } else {
-      location.city = props.match.params.city
-      location.state = props.match.params.state
+      TAlocation.city = props.match.params.city
+      TAlocation.state = props.match.params.state
     }
     
     
-    // let filterCodes = filters;
-    // After the data comes back from the API, we
-    //  use the setOwners function to update state
-    
-    
-    // return APIManager.getDummyList()
+
     let tempLocationID = "";
-    return APIManager.getTripAdvisorLocationCode(location)
-      .then(response => {
-        tempLocationID = response.data[0].result_object.location_id
-          APIManager.getTripAdvisorListByLocation(response.data[0].result_object.location_id,filterCodes)
-          .then(response => {
-            // setRestaurants(response.data.filter(restaurant => restaurant.location_id !== taLocationId ));
-            setRestaurants(response.data.filter(restaurant => restaurant.location_id !== tempLocationID ));
-            })
-            .then(() => {
-              APIManager.getCollection(activeUserId)
-              .then(response => {
-                setCollection(response)
-                setIsLoading(false)
+
+  
+      // return APIManager.getDummyList()
+      return APIManager.getTripAdvisorLocationCode(TAlocation)
+        .then(response => {
+          tempLocationID = response.data[0].result_object.location_id
+            APIManager.getTripAdvisorListByLocation(response.data[0].result_object.location_id,filterCodes)
+            .then(response => {
+              setRestaurants(response.data.filter(restaurant => restaurant.location_id !== tempLocationID ));
               })
-            })
-           
-      })
+              .then(() => {
+                APIManager.getCollection(activeUserId)
+                .then(response => {
+                  setCollection(response)
+                  setIsLoading(false)
+                })
+              })
+            
+        })
+  
       // return APIManager.getDummyList()
       
   };

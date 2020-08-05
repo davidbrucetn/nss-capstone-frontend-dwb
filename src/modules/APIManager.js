@@ -1,4 +1,5 @@
 import { apiKeys, jsonDB } from "./Settings.js"
+import Helper from "./Helper"
 
 export default {
     
@@ -33,6 +34,16 @@ export default {
     },
     getCollection(userId) {
         return fetch(`${jsonDB}/collection?userId=${userId}&_embed=ratings&_expand=user`)
+        .then(response => response.json())
+    },
+    getCollectionDiningOptions(userId,filterCode) {
+        let diningOption = "";
+        if (filterCode !== "all") {
+            diningOption = Helper.collectionDiningOptionBoolean(filterCode[0])
+            diningOption = diningOption + "=true"
+        } else { diningOption = "" }
+        
+        return fetch(`${jsonDB}/collection?userId=${userId}&${diningOption}&_embed=ratings&_expand=user`)
         .then(response => response.json())
     },
     getCollectionObject(collectionId,userId) {

@@ -11,51 +11,52 @@ import Helper from "../../modules/Helper"
 
 const CollectionList = (props) => {
   // The initial state is an empty array
-  const [ diningType, setDiningType ] = useState("")
   const [collection, setCollection] = useState([]);
+  const [ diningType, setDiningType ] = useState("")
 
   let textDiningType = "";
-  const filterCodes = [];
 
   const getCollection = () => {
 
-    // const filters = [ { filter: "Outdoor Seating", code: 1603}, { filter: "Delivery", code: ""}]
-    // const locations = [ {city: "Franklin", locationId: "5562736"},{city: "Nashville", locationId: "55229"} ]
-    // const locationFind = locations.splice(locations.findIndex(location => location.city === "Nashville"), 1)
-
     const activeUserId = Helper.getActiveUserId();
-    
+    let filterCodes = [];
+    let TAlocation = {};
+    let textDiningType = "";
+    const cityStateTemp = {
+      city: props.match.params.city,
+      state: props.match.params.state
+    }
+
     if (props.diningOptions !== undefined) {
-        textDiningType = Helper.diningOptionMatch(props.diningOptions)
-        if (textDiningType !== "") {
-          filterCodes.push(props.diningOptions)
-          setDiningType(textDiningType)
-        }
+      textDiningType = Helper.diningOptionMatch(props.diningOptions)
+
+      if (textDiningType !== "") {
+        filterCodes.push(props.diningOptions)
+        setDiningType(textDiningType)
+      }
     } else {
         const filterCode = { filter: "All", code: "all"}
-        filterCodes.push(filterCode)
+        filterCodes.push("all")
         setDiningType(filterCode)
     }
     
+    if (props.match.params.city === undefined ) {
+      TAlocation.city = "Nashville";
+      TAlocation.state = "Tennessee"
+    } else {
+      TAlocation.city = props.match.params.city
+      TAlocation.state = props.match.params.state
+    }
     
-    // let filterCodes = filters;
-    // After the data comes back from the API, we
-    //  use the setOwners function to update state
-    
-    // return APIManager.getTripAdvisorListByLocation(locationFind[0].locationId,filterCodes)
-    return APIManager.getCollection(activeUserId)
+    // return APIManager.getCollection(activeUserId)
+    console.log(filterCodes)
+    return APIManager.getCollectionDiningOptions(activeUserId,filterCodes)
     .then(response => {
         setCollection(response);
         });
   };
 
-  // APIManager.getTripAdvisorListByLocation(locationFind[0].locationId,filterCodes)
-  // .then(response => {
-  //   setCollection(response.data.filter(restaurant => restaurant.location_id !== "55229" ));
-  //         });
-  //   };
-
-
+ 
   // got the owners from the API on the component's first render
   useEffect(() => {
     getCollection()
@@ -67,11 +68,16 @@ const CollectionList = (props) => {
       <section className="section__content">
         <div className="container__parent">
           <div className="container__header">
-            CollectionList
+            <h3>Your Collection</h3>
           </div>
-          <div className="container-cards">
-            {collection.map(restaurant => <CollectedRestaurantCard key={restaurant.id} restaurant={restaurant} />)}
+          <div class="card-deck">
+
+              {/* <div className="container-cards"> */}
+                {collection.map(restaurant => <CollectedRestaurantCard key={restaurant.id} restaurant={restaurant} />)}
+              {/* </div> */}
           </div>
+
+
       </div>
       </section>
     </>

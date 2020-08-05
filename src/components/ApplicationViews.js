@@ -46,6 +46,12 @@ const ApplicationViews = (props) => {
       <Route exact path="/outdoor/:state/:city" render={props => <RestaurantList  diningOptions="10603" {...props} />} />
       <Route exact path="/takeout/:state/:city" render={props => <RestaurantList  diningOptions="10601" {...props} />} />
 
+
+      <Route exact path="/saveddelivery" render={props => <CollectionList  diningOptions="10600" {...props} />} />
+      <Route exact path="/saveddrivethru" render={props => <CollectionList  diningOptions="20992" {...props} />} />
+      <Route exact path="/savedoutdoor" render={props => <CollectionList  diningOptions="10603" {...props} />} />
+      <Route exact path="/savedtakeout" render={props => <CollectionList  diningOptions="10601" {...props} />} />
+
       <Route exact path="/saveddelivery/:state/:city" render={props => <CollectionList  diningOptions="10600" {...props} />} />
       <Route exact path="/saveddrivethru/:state/:city" render={props => <CollectionList  diningOptions="20992" {...props} />} />
       <Route exact path="/savedoutdoor/:state/:city" render={props => <CollectionList  diningOptions="10603" {...props} />} />
@@ -63,6 +69,13 @@ const ApplicationViews = (props) => {
       <Route exact path="/collection" render={props => <CollectionList {...props}/>} />
       <Route exact path="/collection/:state/:city" render={props => <CollectionList {...props}/>} />
       <Route exact path="/collection/:state/:city/:id(\d+)/details" render={props => {
+        if (hasUser) {
+          return <RestaurantDetail locationId={parseInt(props.match.params.id)} restaurant={props.restaurant} {...props} />
+        } else {
+          return <Redirect to="/login" />
+        }
+      }} />
+      <Route exact path="/collection/:id(\d+)/details" render={props => {
         if (hasUser) {
           return <RestaurantDetail locationId={parseInt(props.match.params.id)} restaurant={props.restaurant} {...props} />
         } else {

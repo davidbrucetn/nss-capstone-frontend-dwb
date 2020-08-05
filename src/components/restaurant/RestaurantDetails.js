@@ -171,7 +171,9 @@ const handleRatingCancel = (evt) => {
       
       setEditEnabled(false)
       setRestaurant(restaurant)
-      setMediumPhoto((restaurant.photo.images.medium.url === null || restaurant.photo.images.medium.url === "") ? "":<img src={restaurant.photo.images.medium.url} alt={restaurant.name} />);
+      if (restaurant.photo !== undefined ) {
+        setMediumPhoto((restaurant.photo.images.medium.url === null || restaurant.photo.images.medium.url === "") ? "":<img src={restaurant.photo.images.medium.url} alt={restaurant.name} />);
+      }
       if (typePull === "LOCAL" ) { 
         setPPEChecked(restaurant.ppe)
         setDeliveryChecked(restaurant.delivery)
@@ -320,13 +322,21 @@ const handleRatingCancel = (evt) => {
     </form>
     </>
      )
-  }}
+  } else { 
+      return <>
+      <aside className="aside__addMe">
+          <div>
+            <p> Click on the <CollectionSaveitem /> to add this restaurant to your collection and rate!</p>
+          </div>
+      </aside> </> }
+}
  
 
   useEffect(() => {
     const activeUserId = Helper.getActiveUserId()
         console.log("Detail Location", props.locationId)
         const APICall = (locationId) => {
+
     if (props.location.pathname.includes("/restaurant")) {
       APIManager.getTripAdvisorDetails(locationId)
       .then(response => {

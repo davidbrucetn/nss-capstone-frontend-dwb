@@ -318,3 +318,14 @@ button {
   font-size: 2em;
   transition: all 0.8s
 }
+
+.aside__addMe {
+  display: flex;           
+  justify-content: center; 
+  align-items: center;     
+  min-width: 0;
+  color: #8c0303;
+  font-weight: 600; 
+  margin-top: 3em;
+  
+}
