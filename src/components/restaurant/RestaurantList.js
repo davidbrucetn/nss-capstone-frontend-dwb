@@ -11,6 +11,7 @@ const RestaurantList = (props) => {
   const [ restaurants, setRestaurants ] = useState([]);
   const [ collection, setCollection ] = useState([])
   const [ diningType, setDiningType ] = useState("")
+  const [ TAlocation, setTAlocation ] = useState({})
 
   let textDiningType = "";
   
@@ -19,12 +20,8 @@ const RestaurantList = (props) => {
 
     const activeUserId = Helper.getActiveUserId();
     const filterCodes = [];
-    let TAlocation = {};
-    const cityStateTemp = {
-      city: props.match.params.city,
-      state: props.match.params.state
-    }
-
+    const tempTAlocation = {};
+    
       if (props.diningOptions !== undefined) {
       textDiningType = Helper.diningOptionMatch(props.diningOptions)
 
@@ -39,11 +36,13 @@ const RestaurantList = (props) => {
     }
     
     if (props.match.params.city === undefined ) {
-      TAlocation.city = "Nashville";
-      TAlocation.state = "Tennessee"
+      tempTAlocation.city = "Nashville";
+      tempTAlocation.state = "Tennessee"
+      setTAlocation(tempTAlocation)
     } else {
-      TAlocation.city = props.match.params.city
-      TAlocation.state = props.match.params.state
+      tempTAlocation.city = props.match.params.city
+      tempTAlocation.state = props.match.params.state
+      setTAlocation(tempTAlocation)
     }
     
     
@@ -52,20 +51,21 @@ const RestaurantList = (props) => {
 
   
       // return APIManager.getDummyList()
-      return APIManager.getTripAdvisorLocationCode(TAlocation)
+      return APIManager.getTripAdvisorLocationCode(tempTAlocation)
         .then(response => {
-          tempLocationID = response.data[0].result_object.location_id
-            APIManager.getTripAdvisorListByLocation(response.data[0].result_object.location_id,filterCodes)
-            .then(response => {
-              setRestaurants(response.data.filter(restaurant => restaurant.location_id !== tempLocationID ));
-              })
-              .then(() => {
-                APIManager.getCollection(activeUserId)
+              tempLocationID = response.data[0].result_object.location_id
+                APIManager.getTripAdvisorListByLocation(response.data[0].result_object.location_id,filterCodes)
                 .then(response => {
-                  setCollection(response)
-                  setIsLoading(false)
-                })
-              })
+                  setRestaurants(response.data.filter(restaurant => restaurant.location_id !== tempLocationID ));
+                  })
+                  .then(() => {
+                    APIManager.getCollection(activeUserId)
+                    .then(response => {
+                      setCollection(response)
+                      setIsLoading(false)
+                    })
+                  })
+          // } else { return <h3>Location Not Recognized</h3>}
             
         })
   
@@ -92,12 +92,16 @@ const RestaurantList = (props) => {
       <section className="section__content">
         <div className="container__parent">
           <div className="container__header">
-            Restaurants - Dining Option: {diningType.filter}
+            Restaurants - Dining Option: {diningType.filter} { (TAlocation.city !== "") && `${TAlocation.city}, ${TAlocation.state}` }
           </div>
-          <div className="container-cards">
+          
+          <div className="card-deck">
+
             {restaurants.map(restaurant => <RestaurantCard key={restaurant.location_id} restaurant={restaurant}  {...props} diningType = {diningType} collection={collection.filter(collectionItem => collectionItem.location_id === restaurant.location_id)} history={props.history} />)}
+          
           </div>
-      </div>
+        
+        </div>
       </section>
     </>
   );

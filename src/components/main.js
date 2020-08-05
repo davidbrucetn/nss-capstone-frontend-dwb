@@ -10,7 +10,6 @@ const locationFind = locations.splice(locations.findIndex(location => location.c
 let filterCodes = filters;
 
 
-console.log(locationFind[0].locationId)
 
 const getTARestaurants = () => {
 APIManager.getTripAdvisorListByLocation(locationFind[0].locationId,filterCodes)

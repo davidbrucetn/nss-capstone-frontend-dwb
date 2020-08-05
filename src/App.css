@@ -2,14 +2,12 @@
 
 html {
   font-family: 'Lato', sans-serif;
+  margin: 0;
 }
 
 
 .App {
-  display: flex;
-  
-  width: 98%;
-  margin: 0;
+
   text-align: center;
   margin: 0;
 }
@@ -27,7 +25,7 @@ html {
 
 .App-header {
   background-color: #282c34;
-  min-height: 10vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -51,74 +49,29 @@ html {
 
 
 
-.container__app__left {
-  display: flex;
-  flex-flow: column nowrap;
-  width: 10%;
-  margin: 0;
-  background-color: lightslategray;
-}
-
-.container__app__right {
-  display: flex;
-  flex-flow: column nowrap;
-  flex-grow: 1;
-  
-  background-color: lightsteelblue;
-}
-
 .section-content {
-  padding: 1.4em;
+  padding: 0;
 
 }
 
-.container__header > h3 {
+.container__header {
   color: #8c0303;
+  font-weight: 600;
 }
 
-.container__parent {
+.container__header {
   display: flex;
-  flex-flow: column wrap;
-  width: 97%;
-  margin-top: 2em;
-  margin-left: 1em;
-  margin-right: 1em;
+  flex-flow: column;
+  justify-content: center;
+  text-align: center;
+  height: 5vh;
   box-shadow:0 4px 10px 0 rgba(7, 83, 182, 0.2),0 4px 20px 0 rgba(131, 5, 53, 0.19);
   border-radius: 5px;
 }
 
-.container__header {
-  display: inline;
-  justify-content: center;
-  text-align: center;
-}
-
-.container-cards {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-evenly;
-
-}
-.container__cards__restaurants {
-    flex: 0 0 33%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;  
-    text-align: left;
-    width: 99%;
-    margin-left: 1em;
-    margin-right: 1em;
-    box-shadow:0 4px 10px 0 rgba(7, 83, 182, 0.2),0 4px 20px 0 rgba(131, 5, 53, 0.19);
-    border-radius: 5px;
-
-}
-
 /* Base Card Container */
-.card-cd {
-  margin: 1em .7em;
-  height: 100%;
-  width: 23%;
+.card-custom {
+  margin: 1em 0 1em 0;
   box-shadow:0 4px 10px 0 rgba(7, 83, 182, 0.2),0 4px 20px 0 rgba(131, 5, 53, 0.19);
   border-radius: 8px;
   
@@ -127,7 +80,7 @@ html {
   display: flex;
   flex-flow: row;
   background-color: #657ba6;
-  height: 20%;
+  height: 100%;
   width: 100%;
   margin: 0;
   justify-content: center;
@@ -145,8 +98,8 @@ html {
 }
 .card__image > .card-img {
 
-  height: 100%;
-  width: auto;
+  /* height: 100%;
+  width: auto; */
 }
 
 
@@ -163,41 +116,9 @@ html {
   border-radius: 5px;
 }
 
-.card__inner {
-display: flex;
-justify-content: space-evenly;
-margin-left: 0;
-}
-
-.div__card__name {
-margin: 0 0 1em 1em;
-}
-
-.header__card__name {
-  font-size: 1em;
-}
-
 p {
 margin-left: 1em;
 margin-top: -10px;
-}
-
-.header__section {
-  text-align: center;
-}
-
-.container__home > img {
-width: 100%;
-height: 570px;
-
-}
-
-.div__home__text {
-display: inline-flex;
-justify-content: flex-start;
-position: absolute;
-color: dimgray;
-transform: translate(2%, -900%);
 }
 
 a {
@@ -210,10 +131,16 @@ a {
   border-radius: 10px;
 }
 
+.card-deck {
+  justify-content: center;
+  margin: .1em;
+}
+
 @media (min-width:34em) {
   .card-deck > .card
   {
-      width: 29%;
+      
+      width: 28%;
       flex-wrap: wrap;
       flex: initial; 
   }

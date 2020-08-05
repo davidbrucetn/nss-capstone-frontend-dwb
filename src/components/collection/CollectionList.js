@@ -22,11 +22,7 @@ const CollectionList = (props) => {
     let filterCodes = [];
     let TAlocation = {};
     let textDiningType = "";
-    const cityStateTemp = {
-      city: props.match.params.city,
-      state: props.match.params.state
-    }
-
+    
     if (props.diningOptions !== undefined) {
       textDiningType = Helper.diningOptionMatch(props.diningOptions)
 
@@ -49,7 +45,6 @@ const CollectionList = (props) => {
     }
     
     // return APIManager.getCollection(activeUserId)
-    console.log(filterCodes)
     return APIManager.getCollectionDiningOptions(activeUserId,filterCodes)
     .then(response => {
         setCollection(response);
@@ -68,13 +63,12 @@ const CollectionList = (props) => {
       <section className="section__content">
         <div className="container__parent">
           <div className="container__header">
-            <h3>Your Collection</h3>
+            Your Collection - Dining Option: {diningType.filter}
           </div>
-          <div class="card-deck">
+          <div className="card-deck">
 
-              {/* <div className="container-cards"> */}
                 {collection.map(restaurant => <CollectedRestaurantCard key={restaurant.id} restaurant={restaurant} />)}
-              {/* </div> */}
+
           </div>
 
 

@@ -7,7 +7,9 @@
   .container__details {
     display: flex;
     flex-flow: column wrap;
-    margin: 1em;
+    height: auto;
+    width: auto;
+    margin: 2em 2em;
     box-shadow:0 4px 10px 0 rgba(7, 83, 182, 0.2),0 4px 20px 0 rgba(131, 5, 53, 0.19);
     border-radius: 8px;
     background-color: rgb(255, 255, 255);
@@ -17,7 +19,7 @@
   .container__image__layout {
     display: flex;
     max-height: 30vh;
-    background-color: #657ba6;
+    background-color: #8c0303;
 
   }
 
@@ -32,17 +34,6 @@
     background-color: #8c0303;
     box-shadow:0 4px 10px 0 rgba(7, 83, 182, 0.2),0 4px 20px 0 rgba(131, 5, 53, 0.19);
     
-  }
-
-  .container__tinylink {
-    flex: 2;
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
-    justify-content: space-between;
-    align-self: center;
-    box-shadow:0 4px 10px 0 rgba(7, 83, 182, 0.2),0 4px 20px 0 rgba(131, 5, 53, 0.19);
-
   }
 
   .container__details__buttons {
@@ -105,8 +96,9 @@
 }
 
 .container__details__content__hours {
-  flex: 1;
+  flex: 1 0 0;
   display: flex;
+  height: auto;
   flex-flow: column;
   justify-content: flex-start;
   text-align: justify;
@@ -119,8 +111,9 @@
 }
 
 .container__other {
-  flex: 2;
+  flex: 2 0 0;
   display: flex;
+  height: auto;
   flex-flow: column nowrap;
   justify-content: first baseline;
   text-align: justify;
@@ -241,22 +234,23 @@ input, label {
 
 .container__user__ratings {
   display: flex;
+  flex-direction: column-reverse;
 
 }
 .container__ratings__array {
-  display: flex;
+  flex-grow: 1;
   flex-flow: column nowrap;
-  width: 50%;
   min-height: 20vh;
   padding: 1vh .1vw;
   font-size: 1em;
-  margin-right: 1vw;
   background-color: #ffe48b;
   border-radius: 8px;
+  overflow: auto;
 }
   
 .container__ratings__form {
   flex-grow: 1;
+  flex-flow: column nowrap;
   min-height: 20vh;
   background-color: #ffe48b;
   border-radius: 8px;

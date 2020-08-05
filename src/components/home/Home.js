@@ -1,12 +1,12 @@
 import React from "react";
+import "./Home.css"
 
 const Home = () => {
   return (
-    <address>
-      This is home!
-      <br />
-      There's no place like home!
-    </address>
+    <div className="container__home">
+
+    </div>
+    
   );
 };
 

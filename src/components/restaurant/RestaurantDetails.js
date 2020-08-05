@@ -77,7 +77,7 @@ const handleOptionChange = (evt) => {
     setIsLoading(true)
     APIManager.update(restaurant,"collection")
     .then(() => {
-      props.history.push(`/collection/${props.match.params.state}/${props.match.params.city}/${restaurant.id}/details`)
+      props.history.push(`/collection/${restaurant.id}/details`)
     })
   }
 
@@ -90,7 +90,7 @@ const handleOptionChange = (evt) => {
         return APIManager.deleteRating(ratingEntry.id)
         .then(()=> {
           APIManager.deleteObject(restaurant.id,"collection").then(() =>
-          props.history.push(`/collection/${props.match.params.state}/${props.match.params.city}`)
+          props.history.push(`/collection`)
           );    
         })
       })
@@ -99,7 +99,7 @@ const handleOptionChange = (evt) => {
     } else {
       
         APIManager.deleteObject(restaurant.id,"collection").then(() =>
-          props.history.push(`/collection/${props.match.params.state}/${props.match.params.city}`)
+          props.history.push(`/collection`)
         );
     }
   };
@@ -121,13 +121,13 @@ const saveNotesRating = evt => {
       setIsLoading(true);
       if (ratings.id !== undefined) {
         APIManager.update(ratings,"ratings")
-        .then(() => props.history.push(`/collection/${props.match.params.state}/${props.match.params.city}/${restaurant.id}/details`))
+        .then(() => props.history.push(`/collection/${restaurant.id}/details`))
       } else {
         ratings.collectionId = restaurant.id
         ratings.date = new Date()
         //create emp and redirect to list
         APIManager.postObject(ratings,"ratings")
-        .then(() => props.history.push(`/collection/${props.match.params.state}/${props.match.params.city}/${restaurant.id}/details`))
+        .then(() => props.history.push(`/collection/${restaurant.id}/details`))
         }
       }
       
@@ -137,7 +137,7 @@ const saveNotesRating = evt => {
 const handleRatingDelete = (ratingId) => {
   setIsLoading(true);
       APIManager.deleteRating(ratingId)
-      .then(() => props.history.push(`/collection/${props.match.params.state}/${props.match.params.city}/${restaurant.id}/details`))
+      .then(() => props.history.push(`/collection/${restaurant.id}/details`))
  
 };
 
@@ -158,14 +158,10 @@ const handleRatingCancel = (evt) => {
   
   setIsLoading(true)
   
-  history.push(`/collection/${props.match.params.state}/${props.match.params.city}/${restaurant.id}/details`)
+  history.push(`/collection/${restaurant.id}/details`)
   // history.push(`/collection`)
 
- 
 }
-
-
-
 
   const generateDetail = (restaurant,typePull) => {
       
@@ -333,27 +329,28 @@ const handleRatingCancel = (evt) => {
  
 
   useEffect(() => {
+    
     const activeUserId = Helper.getActiveUserId()
-        console.log("Detail Location", props.locationId)
-        const APICall = (locationId) => {
+    
+    const APICall = (locationId) => {
 
-    if (props.location.pathname.includes("/restaurant")) {
-      APIManager.getTripAdvisorDetails(locationId)
-      .then(response => {
-         setObjResidence("API")
-         generateDetail(response,"API")
-      })
-      .then(()=> setIsLoading(false)  )
-    } else {
+        if (props.location.pathname.includes("/restaurant")) {
+          APIManager.getTripAdvisorDetails(locationId)
+          .then(response => {
+            setObjResidence("API")
+            generateDetail(response,"API")
+          })
+          .then(()=> setIsLoading(false)  )
+        } else {
 
-      APIManager.getCollectionObject(locationId,activeUserId)
-      .then(response => {
-        setObjResidence("LOCAL")
-        generateDetail(response,"LOCAL")
-      })
-      .then(()=> setIsLoading(false)  )
+          APIManager.getCollectionObject(locationId,activeUserId)
+          .then(response => {
+            setObjResidence("LOCAL")
+            generateDetail(response,"LOCAL")
+          })
+          .then(()=> setIsLoading(false)  )
+        }
     }
-  }
     APICall(props.locationId)
 
 },[props.locationId,props.location.pathname,isLoading])
@@ -370,13 +367,13 @@ const handleRatingCancel = (evt) => {
             
               <div className="container__tinylink">
                 
-                  <ReactTinyLink 
+                  {/* <ReactTinyLink 
                   className="TinyLink_Element"
                   cardSize="small"
                   showGraphic={true}
                   maxLine={2}
                   minLine={2}
-                  url={restaurant.web_url} />
+                  url={restaurant.web_url} /> */}
               </div>
           </div>
       
@@ -391,6 +388,20 @@ const handleRatingCancel = (evt) => {
                 <p>{restaurant.address_obj.city}, {restaurant.address_obj.state}  {restaurant.address_obj.postalcode}</p>
               </address>
               <p>Phone:  {restaurant.phone}</p>
+              <p><strong>Rating</strong> {restaurant.rating}</p>
+          <p><strong>Ranking</strong> {restaurant.ranking}</p>
+          {cuisine}
+          <p><strong>Open Now: </strong>{restaurant.open_now_text}</p>
+          
+          { (restaurant.userId === activeUserId) && 
+            <p><strong>Staff using masks/gloves/ppe? </strong> { (restaurant.ppe === false) ? "No  ":"Yes  "}
+            
+              { (editEnabled ) &&
+                <RestaurantCheckbox id="ppe" name="ppe" onChange={handlePPEChange} color="primary" title="PPE?" value={ppeChecked} checked={ppeChecked} />
+              }
+            
+              </p> 
+          }
           </div>
           <div className="container__options">
               <p><strong>Delivery: </strong>{Helper.returnYesNo(restaurant.delivery)}  { (editEnabled ) &&
@@ -414,20 +425,7 @@ const handleRatingCancel = (evt) => {
               
 
         <div key={"container__details__ratings" + restaurant.location_id } className="container__details__ratings">
-          <p><strong>Rating</strong> {restaurant.rating}</p>
-          <p><strong>Ranking</strong> {restaurant.ranking}</p>
-          {cuisine}
-          <p><strong>Open Now: </strong>{restaurant.open_now_text}</p>
-          
-          { (restaurant.userId === activeUserId) && 
-            <p><strong>Staff using masks/gloves/ppe? </strong> { (restaurant.ppe === false) ? "No  ":"Yes  "}
-            
-              { (editEnabled ) &&
-                <RestaurantCheckbox id="ppe" name="ppe" onChange={handlePPEChange} color="primary" title="PPE?" value={ppeChecked} checked={ppeChecked} />
-              }
-            
-              </p> 
-          }
+        
 
           <div key={"container__details__buttons"} className="container__details__buttons">
             {buildButtonArray()}
