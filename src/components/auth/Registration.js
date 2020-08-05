@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { jsonDB } from "../../modules/Settings"
 import "./Registration.css"
 import APIManager from '../../modules/APIManager';
+import "./Login.css"
 
 
 function RegistrationForm(props) {
@@ -24,7 +25,6 @@ function RegistrationForm(props) {
             APIManager.getAllUsers()
             .then(users => {
                if ( (users.some(user => user.email === credentials.email)) === true ) {
-                   console.log("Found email")
                 props.showError('This email has already been registered')  
                } else {
 
@@ -66,7 +66,7 @@ function RegistrationForm(props) {
     }
    
     const redirectToHome = () => {
-        props.updateTitle('Home')
+        // props.updateTitle('Home')
         props.history.push('/home');
     }
  
@@ -79,6 +79,8 @@ function RegistrationForm(props) {
         }
     }
     return(
+    <div className="container__home">
+        <div className="container__form__login">
         <div className="card col-12 col-lg-4 login-card mt-2 hv-center">
             <form>
                 <div className="form-group text-left">
@@ -135,8 +137,9 @@ function RegistrationForm(props) {
               <button>Login Here</button>
             </Link>
             </div>
-            
+            </div>
         </div>
+    </div>
     )
 }
 

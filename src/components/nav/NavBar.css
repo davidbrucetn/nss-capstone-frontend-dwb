@@ -68,7 +68,10 @@
     color: #d5d95b;
   }
   
-  @media (max-width: 410px) {
+  @media (max-width: 419px) {
+    .navbar {
+      background-color: #8c0303;
+    }
     .navbar-expand-sm .navbar-nav .show .dropdown-menu .dropdown-item {
       color: #f2e1c2;
     }

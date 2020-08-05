@@ -1,0 +1,60 @@
+.container__home {
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+    width: auto;
+    background-image: url("../nav/images/logo.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+.form__login {
+    height: 30vh;
+    width: auto;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    color: #f2e1c2;
+
+}
+
+.fieldset__form__login, .fieldset__form__registration  {
+    padding: 1em 2em;
+    background:linear-gradient(to left, #955DFF, #6FAAFF);
+    border-radius: 30px;
+    box-shadow:0 6px 10px 0 rgba(172, 33, 9, 0.2),0 10px 20px 0 rgba(4, 37, 90, 0.19);
+    
+}
+
+
+
+.container__form__login
+{
+    margin: 0;
+    display: flex;
+    flex-flow: column;
+    width: 50vw;
+    height: 42vh;
+    padding:20px 15px;
+    padding-top:0px;
+    background-color: inherit;
+    border-radius: 30px;
+}
+
+
+.container__form__login--buttons {
+    display: flex;
+    flex-flow: row nowrap;
+    font-size: .8em;
+    justify-content: space-between;
+    
+    
+}
+button {
+    font-size: 1em;
+}
+

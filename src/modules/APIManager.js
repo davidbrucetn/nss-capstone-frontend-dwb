@@ -72,7 +72,6 @@ export default {
         });
     },
     getTripAdvisorListByLocation(locationId,filterCode) {
-        console.log(filterCode[0])
         const diningOption = filterCode[0]
         return fetch(`https://tripadvisor1.p.rapidapi.com/restaurants/list?restaurant_tagcategory_standalone=10591&lunit=km&restaurant_tagcategory=10591&limit=30&currency=USD&lang=en_US&restaurant_dining_options=${diningOption}&location_id=${locationId}`, {
             "method": "GET",

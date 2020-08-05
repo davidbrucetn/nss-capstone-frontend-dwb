@@ -24,6 +24,7 @@ const NavbarMenu = (props) => {
     const [ validateMsg, setValidateMsg ] = useState("")
     let locationPath = "";
 
+    
     // handleFieldChange called from button onChange event, will update object as characters are typed in the fields. 
   const handleFieldChange = evt => {
     setValidateMsg("")
@@ -40,11 +41,17 @@ const NavbarMenu = (props) => {
    } 
   };
 
+  function clearInputBox() {
+      setCityStateStr("");
+  }
+
+
   const handleValidation = evt => {
 
       if (evt.target.value.indexOf(',') < 0) {
             setValidateMsg(<div className="validate__message">Must have <em>City, State</em> to search</div>)
-      }
+      } else { setTimeout(clearInputBox,5000) }
+
   }
   
     const handleLogout = () => {
@@ -56,10 +63,12 @@ const NavbarMenu = (props) => {
         } else {
             locationPath = `/${searchCitySt.state}/${searchCitySt.city}`;
         }
-    
+
+
+
         return (
             <div>
-                <Navbar className="faded navbar" color="faded" light expand="xs">
+                <Navbar className="faded navbar" toggleable="xs" color="faded" light expand="md">
 
                     <NavbarToggler />
                     <Collapse navbar>
@@ -75,30 +84,29 @@ const NavbarMenu = (props) => {
                             </NavbarBrand>
                           
                             <NavItem>
-                                <NavLink tag={RRNavLink} className="nav-link" activeClassName="selected" exact to="/"><FaHome /></NavLink>
+                                <NavLink id="homeNav" tag={RRNavLink} className="nav-link" activeClassName="selected" exact to="/"><FaHome /></NavLink>
                             </NavItem>
                             
 
                             {props.hasUser ? 
                             <UncontrolledDropdown nav inNavbar>
-                                <DropdownToggle nav caret>
+                                <DropdownToggle nav caret >
                                     Your Collection
                                 </DropdownToggle>
-                                    <DropdownMenu right>
-                                        <DropdownItem tag={RRNavLink} className="nav-link" activeClassName="selected" exact to={`/collection${locationPath}`}
-                                          >
+                                    <DropdownMenu right >
+                                        <DropdownItem tag={RRNavLink} className="nav-link" activeClassName="selected" exact to={`/collection`} >
                                             All
                                         </DropdownItem>
-                                        <DropdownItem tag={RRNavLink} className="nav-link" activeClassName="selected" exact to={`/saveddelivery${locationPath}`} >
+                                        <DropdownItem tag={RRNavLink} className="nav-link" activeClassName="selected" exact to={`/saveddelivery`} >
                                             Delivery
                                         </DropdownItem>
-                                        <DropdownItem tag={RRNavLink} className="nav-link" activeClassName="selected" exact to={`/saveddrivethru${locationPath}`} >
+                                        <DropdownItem tag={RRNavLink} className="nav-link" activeClassName="selected" exact to={`/saveddrivethru`} >
                                             Drive-Thru
                                         </DropdownItem>
-                                        <DropdownItem tag={RRNavLink} className="nav-link" activeClassName="selected" exact to={`/savedoutdoor${locationPath}`} >
+                                        <DropdownItem tag={RRNavLink} className="nav-link" activeClassName="selected" exact to={`/savedoutdoor`} >
                                             Outdoor Seating
                                         </DropdownItem>
-                                        <DropdownItem tag={RRNavLink} className="nav-link" activeClassName="selected" exact to={`/savedtakeout${locationPath}`} >
+                                        <DropdownItem tag={RRNavLink} className="nav-link" activeClassName="selected" exact to={`/savedtakeout`} >
                                             Take Out
                                         </DropdownItem>
                                 </DropdownMenu>
@@ -106,24 +114,24 @@ const NavbarMenu = (props) => {
                             : null }
 
                             {props.hasUser ? 
-                            <UncontrolledDropdown nav inNavbar>
-                                <DropdownToggle nav caret>
+                            <UncontrolledDropdown nav inNavbar >
+                                <DropdownToggle nav caret >
                                     Search Restaurants
                                 </DropdownToggle>
                                     <DropdownMenu right>
-                                        <DropdownItem tag={RRNavLink} className="nav-link" activeClassName="selected" exact to={`/restaurant${locationPath}`} data-city={searchCitySt.city}>
+                                        <DropdownItem tag={RRNavLink} className="nav-link" activeClassName="selected" exact to={`/restaurant${locationPath}`} >
                                             All
                                         </DropdownItem>
-                                        <DropdownItem tag={RRNavLink} className="nav-link" activeClassName="selected" exact to={`/delivery${locationPath}`} data-city={searchCitySt.city}>
+                                        <DropdownItem tag={RRNavLink} className="nav-link" activeClassName="selected" exact to={`/delivery${locationPath}`} >
                                             Delivery
                                         </DropdownItem>
-                                        <DropdownItem  tag={RRNavLink} className="nav-link" activeClassName="selected" exact to={`/drivethru${locationPath}`} data-city={searchCitySt.city}>
+                                        <DropdownItem  tag={RRNavLink} className="nav-link" activeClassName="selected" exact to={`/drivethru${locationPath}`} >
                                             Drive-Thru
                                         </DropdownItem>
-                                        <DropdownItem tag={RRNavLink} className="nav-link" activeClassName="selected" exact to={`/outdoor${locationPath}`} data-city={searchCitySt.city}>
+                                        <DropdownItem tag={RRNavLink} className="nav-link" activeClassName="selected" exact to={`/outdoor${locationPath}`} >
                                             Outdoor Seating
                                         </DropdownItem>
-                                        <DropdownItem  tag={RRNavLink} className="nav-link" activeClassName="selected" exact to={`/takeout${locationPath}`} data-city={searchCitySt.city}>
+                                        <DropdownItem  tag={RRNavLink} className="nav-link" activeClassName="selected" exact to={`/takeout${locationPath}`} >
                                             Take Out
                                         </DropdownItem>
                                 </DropdownMenu>
@@ -132,7 +140,7 @@ const NavbarMenu = (props) => {
                             
                             {props.hasUser
                                 ?<li>
-                                <span className="inline__search" ><input type="text" value={cityStateStr} onBlur={handleValidation} onChange={handleFieldChange} placeholder="City, State"></input>{validateMsg} </span>
+                                <span className="inline__search" ><input className="cityStateSearch" type="text" value={cityStateStr} onBlur={handleValidation} onChange={handleFieldChange} placeholder="City, State"></input>{validateMsg} </span>
                             </li>
                                 :  <li>
                                 <NavLink className="nav-link" to="/login"> Login </NavLink>

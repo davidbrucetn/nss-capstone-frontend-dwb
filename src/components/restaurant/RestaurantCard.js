@@ -77,7 +77,7 @@ const RestaurantCard = (props) => {
   
   return (
     (!isLoading) ?
-    <div className="card-cd" >
+    <div className="card card-custom" >
         
         
         <picture >
@@ -91,7 +91,7 @@ const RestaurantCard = (props) => {
         
           
             <h4 className="card-title">
-              <span className="card-restaurantName"><a href={props.restaurant.web_url} target="_blank">{props.restaurant.name}</a></span>
+              <span className="card-restaurantName"><a href={props.restaurant.web_url} target="_blank" rel="noopener noreferrer">{props.restaurant.name}</a></span>
             </h4>
           
           

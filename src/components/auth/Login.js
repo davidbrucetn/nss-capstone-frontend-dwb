@@ -2,6 +2,7 @@ import React, { useState,useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import { Link } from "react-router-dom";
 import APIManager from "../../modules/APIManager"
+import "./Login.css"
 
 const Login = (props) => {
     const [ credentials, setCredentials ] = useState({ email: "", password: "", id: "" });
@@ -57,31 +58,35 @@ const Login = (props) => {
     
 
 return (
-    <form onSubmit={handleLogin}>
-        <fieldset>
-            <h3>Please sign in</h3>
-            <div className="formgrid">
-            <input onChange={handleFieldChange} type="email"
-            id="email"
-            placeholder="Email address"
-            required="" autoFocus="" />
-          <label htmlFor="inputEmail">Email address</label>
+    <div className="container__home">
+        <div className="container__form__login">
+            <form className="form__login" onSubmit={handleLogin}>
+                <fieldset className="fieldset__form__login">
+                    <h3>Please sign in</h3>
+                    <div className="formgrid__login">
+                        <input onChange={handleFieldChange} type="email"
+                        id="email"
+                        placeholder="Email address"
+                        required="" autoFocus="" />
+                        <label htmlFor="inputEmail">Email address</label>
 
-          <input onChange={handleFieldChange} type="password"
-            id="password"
-            placeholder="Password"
-            required="" />
-          <label htmlFor="inputPassword">Password</label>
+                        <input onChange={handleFieldChange} type="password"
+                            id="password"
+                            placeholder="Password"
+                            required="" />
+                        <label htmlFor="inputPassword">Password</label>
 
-          <input type="checkbox" value="localCreds" id="localCreds" onChange={handleFieldChange}/>
-          <label htmlFor="localCreds">Remember Me</label>
+                        
+                    </div>
+                    <div className="container__form__login--buttons">
+                    Remember Me<input type="checkbox" value="localCreds" id="localCreds" onChange={handleFieldChange}/>
+                        <button type="submit">Sign in</button>
+                        <Link to={`/registration`}><button>New User</button></Link>
+                    </div>
+                </fieldset>
+            </form>
         </div>
-        <button type="submit">Sign in</button>
-        <Link to={`/registration`}>
-              <button>Register New User</button>
-            </Link>
-        </fieldset>
-    </form>
+    </div>
     );
 };
 export default withRouter(Login);
