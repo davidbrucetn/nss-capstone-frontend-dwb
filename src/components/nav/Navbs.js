@@ -153,6 +153,13 @@ const NavbarMenu = (props) => {
                                 <NavLink tag={RRNavLink} className="nav-link" to="/login"> Login </NavLink>
                                 }
                             </NavItem>
+                            <NavItem>
+                             {props.hasUser
+                                ? <NavLink tag={RRNavLink} className="nav-link" to="/usersettings"> User Settings </NavLink>
+                                :  
+                                <NavLink tag={RRNavLink} className="nav-link" to="/login"> Login </NavLink>
+                                }
+                            </NavItem>
 
 
 
