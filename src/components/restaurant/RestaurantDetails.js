@@ -373,13 +373,13 @@ const handleRatingCancel = (evt) => {
             
               <div className="container__tinylink">
                 
-                  {/* <ReactTinyLink 
+                  <ReactTinyLink 
                   className="TinyLink_Element"
                   cardSize="small"
                   showGraphic={true}
                   maxLine={2}
                   minLine={2}
-                  url={restaurant.web_url} /> */}
+                  url={restaurant.web_url} />
               </div>
           </div>
       
