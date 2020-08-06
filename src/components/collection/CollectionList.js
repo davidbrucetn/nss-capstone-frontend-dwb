@@ -11,17 +11,21 @@ import Helper from "../../modules/Helper"
 
 const CollectionList = (props) => {
   // The initial state is an empty array
+
   const [collection, setCollection] = useState([]);
   const [ diningType, setDiningType ] = useState("")
+  const [ activeUserId, setActiveUserId ] =useState("")
 
   let textDiningType = "";
-
   const getCollection = () => {
 
-    const activeUserId = Helper.getActiveUserId();
+    const userEmail=Helper.getActiveUserEmail();
+    APIManager.getUserbyEmail(userEmail)
+    .then((userObjectArray) => {
+      setActiveUserId(userObjectArray[0].id)
+    })
     let filterCodes = [];
     let TAlocation = {};
-    let textDiningType = "";
     
     if (props.diningOptions !== undefined) {
       textDiningType = Helper.diningOptionMatch(props.diningOptions)
@@ -44,18 +48,22 @@ const CollectionList = (props) => {
       TAlocation.state = props.match.params.state
     }
     
-    // return APIManager.getCollection(activeUserId)
     return APIManager.getCollectionDiningOptions(activeUserId,filterCodes)
     .then(response => {
         setCollection(response);
+
         });
   };
+
+  
 
  
   // got the owners from the API on the component's first render
   useEffect(() => {
+    
+   
     getCollection()
-  }, []);
+  }, [activeUserId]);
 
   // Finally we use map() to "loop over" the owners array to show a list of owner cards
   return (

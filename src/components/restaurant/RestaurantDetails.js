@@ -16,6 +16,7 @@ import { Checkbox as RestaurantCheckbox } from '@material-ui/core';
 
 const RestaurantDetail = (props) => {
   const [isLoading, setIsLoading] = useState(true);
+  const [ activeUserId, setActiveUserId ] = useState("");
   const [restaurant, setRestaurant] = useState({ name: "", location_id: "" });
   const [ editEnabled, setEditEnabled ] = useState(false)
   const [ ppeChecked, setPPEChecked ] = useState(false);
@@ -33,7 +34,13 @@ const RestaurantDetail = (props) => {
 
   const ratingsArray = [];  
   const buttonArray = [];
-  const activeUserId = Helper.getActiveUserId();
+  
+  const userEmail=Helper.getActiveUserEmail();
+  APIManager.getUserbyEmail(userEmail)
+  .then((userObjectArray) => {
+    setActiveUserId(userObjectArray[0].id)
+  })
+
 
   const history = useHistory();
 
@@ -330,7 +337,6 @@ const handleRatingCancel = (evt) => {
 
   useEffect(() => {
     
-    const activeUserId = Helper.getActiveUserId()
     
     const APICall = (locationId) => {
 
