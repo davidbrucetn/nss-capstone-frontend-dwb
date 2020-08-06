@@ -1,5 +1,5 @@
 $ nss-capstone-frontend-dwb  
-# CoviDining   
+# Covid-Dining :mask:
   
 	Name:	David Bruce  
 	Email Address:	david.bruce.tn@gmail.com  
@@ -14,11 +14,11 @@ Brief Proposal: CoviDining is a restaurant app for the Covid life, for people to
   
 Overview of Application:   
 	What problem does your application solve?   
-		Since the advent of the COVID-19 virus, the US finds virus numbers keep climbing, and no vaccine is currently available. This app will allow people search for establishments that people will feel safer ordering from.  
+		Since the advent of the COVID-19 virus, the US finds virus numbers keep climbing, and no vaccine is currently available. This app will allow people search for establishments from which people will feel safer ordering.  
 	Who are the target users of this application?	  
-		Any people who want to eat out without worry of exposure to COVID-19.  
+		Any people who want to eat out without excessive worry of exposure to COVID-19.  
 	What can a user do with this application?  
-		Search for restaurants by options of outdoor dining, delivery, or drive through, and save them to their local collection, as well as make note of whether the establishment employees wear masks and/or gloves, etc.  
+		Search for restaurants by options of outdoor dining, delivery, take out, or drive through, and save them to their local collection, as well as make note of whether the establishment employees wear masks and/or gloves, etc.  
 	Why do you want to build this application?  
 		These are all things that many people, including myself, think about when we want to get food from a restaurant these days.  
   
@@ -26,11 +26,10 @@ Features included in MVP Definition:
 	1. Register and login users  
 	2. Save user profile info  
 	3. Search restaurants by four of three different options:   
-	   - Outdoor Seating  
-	   - Delivery  
-	   - Take Out
-	   - Drive Through  
-	   - Save Restaurant to Collection with notes and/or PPE boolean.  
+	   * Outdoor Seating  
+	   * Delivery  
+           * Take Out  
+	   * Save Restaurant to Collection with notes and/or PPE boolean.  
   
 Features that are Stretch Goals:  
 	Save user picture and any other ideas for enhancements that come up in development.  
