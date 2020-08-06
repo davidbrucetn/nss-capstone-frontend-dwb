@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { NavLink as RRNavLink, withRouter  } from "react-router-dom";
 import { FaHome } from "react-icons/fa"
-// import RestaurantSearch from "../restaurant/RestaurantSearch"
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import "./NavBar.css"
 import {

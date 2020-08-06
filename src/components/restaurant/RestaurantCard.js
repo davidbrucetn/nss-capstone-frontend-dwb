@@ -11,6 +11,7 @@ import "../../App.css"
 
 const RestaurantCard = (props) => {
     const [ isLoading, setIsLoading ] = useState(false)
+    const [ activeUserId, setActiveUserId ] = useState("");
     let diningBooleanKey = "";
     let pictureHTML = "";
 
@@ -21,7 +22,11 @@ const RestaurantCard = (props) => {
       thisPath = `/restaurant/${props.match.params.state}/${props.match.params.city}` 
     }
     
-    const activeUserId = Helper.getActiveUserId();
+    const userEmail=Helper.getActiveUserEmail();
+    APIManager.getUserbyEmail(userEmail)
+    .then((userObjectArray) => {
+      setActiveUserId(userObjectArray[0].id)
+    })
     if (props.restaurant.photo !== undefined ) {
       let smallPhoto = props.restaurant.photo.images.small.url;
       pictureHTML = (smallPhoto === null || smallPhoto === "") ? "":<img className="card-img-top" src={props.restaurant.photo.images.small.url} alt={props.restaurant.name} />

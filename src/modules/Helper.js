@@ -1,6 +1,8 @@
 //Helper Functions 
 //Author: David Bruce
 
+import APIManager from "./APIManager";
+
 const filters = [ { filter: "Drive-thru", code: "20992"},{ filter: "Outdoor Seating", code: "10603"}, { filter: "Delivery", code: "10600"}, {filter: "Takeout", code: "10601"}]
 
 
@@ -35,9 +37,11 @@ export default {
         date = date.split("-")
         return date = `${date[1]}-${date[2]}-${date[0]}`
     },
-    getActiveUserId() {
-        const activeUserId = sessionStorage.getItem("credentials") === null ? JSON.parse(localStorage.getItem("credentials")).id :JSON.parse(sessionStorage.getItem("credentials")).id
-        return activeUserId
+    getActiveUserEmail() {
+        const activeUserEmail = sessionStorage.getItem("credentials") === null ? JSON.parse(localStorage.getItem("credentials")).email :JSON.parse(sessionStorage.getItem("credentials")).email
+        return activeUserEmail;
+        // const activeUserId = sessionStorage.getItem("credentials") === null ? JSON.parse(localStorage.getItem("credentials")).id :JSON.parse(sessionStorage.getItem("credentials")).id
+
     },
     returnHours(timeMinutes) {
         let hourValue = Math.floor(timeMinutes /60)

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from "react-router-dom";
-//import the components we will need
 import RestaurantCard from "./RestaurantCard"
 import APIManager from "../../modules/APIManager";
 import Helper from "../../modules/Helper"
@@ -8,6 +7,7 @@ import Helper from "../../modules/Helper"
 const RestaurantList = (props) => {
   // The initial state is an empty array
   const [ isLoading, setIsLoading ] = useState(true);
+  const [ activeUserId, setActiveUserId ] = useState("");
   const [ restaurants, setRestaurants ] = useState([]);
   const [ collection, setCollection ] = useState([])
   const [ diningType, setDiningType ] = useState("")
@@ -18,7 +18,11 @@ const RestaurantList = (props) => {
 
   const getRestaurants = () => {
 
-    const activeUserId = Helper.getActiveUserId();
+    const userEmail=Helper.getActiveUserEmail();
+    APIManager.getUserbyEmail(userEmail)
+    .then((userObjectArray) => {
+      setActiveUserId(userObjectArray[0].id)
+    })
     const filterCodes = [];
     const tempTAlocation = {};
     
@@ -50,7 +54,7 @@ const RestaurantList = (props) => {
     let tempLocationID = "";
 
   
-      // return APIManager.getDummyList()
+
       return APIManager.getTripAdvisorLocationCode(tempTAlocation)
         .then(response => {
               tempLocationID = response.data[0].result_object.location_id
@@ -65,28 +69,20 @@ const RestaurantList = (props) => {
                       setIsLoading(false)
                     })
                   })
-          // } else { return <h3>Location Not Recognized</h3>}
+
             
         })
   
-      // return APIManager.getDummyList()
       
   };
 
-  // APIManager.getTripAdvisorListByLocation(locationFind[0].locationId,filterCodes)
-  // .then(response => {
-  //   setRestaurants(response.data.filter(restaurant => restaurant.location_id !== "55229" ));
-  //         });
-  //   };
 
-
-  // got the owners from the API on the component's first render
   useEffect(() => {
     getRestaurants()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading]);
 
-  // Finally we use map() to "loop over" the owners array to show a list of owner cards
+
   return (
     <>
       <section className="section__content">
