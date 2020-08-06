@@ -1,12 +1,15 @@
 $ nss-capstone-frontend-dwb  
-# Covid-Dining :mask:
-  
+# Covid-Dining 
+
+
+![alt text](https://github.com/davidbrucetn/nss-capstone-frontend-dwb/blob/master/src/components/nav/images/logo.png?raw=true)
+
+
 	Name:	David Bruce  
 	Email Address:	david.bruce.tn@gmail.com  
 	Mentor’s Name:	Jisie David  
 	Capstone Repo on Github:   
 	https://github.com/davidbrucetn/nss-capstone-frontend-dwb  
-  
   
 Name of Project: CoviDining  
   
