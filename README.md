@@ -62,8 +62,10 @@ Technology Stack:
    * React  
    * Bootstrap
 2.  UI
-   * Ant Design Icons  
+   *  CSS - Yours Truly
+   *  Ant Design Icons  
    *  Boostrap Icons  
+   *  Bootstrap Cards
    *  Grommet-Icons  
    *  Material-UI Checkboxes  
    *  Typeicons  
