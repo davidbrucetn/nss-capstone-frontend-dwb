@@ -23,13 +23,13 @@ Overview of Application:
 		These are all things that many people, including myself, think about when we want to get food from a restaurant these days.  
   
 Features included in MVP Definition:   
-	1. Register and login users  
-	2. Save user profile info  
-	3. Search restaurants by four of three different options:   
-	   * Outdoor Seating  
-	   * Delivery  
-           * Take Out  
-	   * Save Restaurant to Collection with notes and/or PPE boolean.  
+  1.  Register and login users  
+  2.  Save user profile info  
+  3.  Search restaurants by one of four different options:  
+      * Outdoor Seating  
+      * Delivery  
+      * Take Out  
+      * Save Restaurant to Collection with notes and/or PPE boolean.  
   
 Features that are Stretch Goals:  
 	Save user picture and any other ideas for enhancements that come up in development.  
@@ -50,13 +50,25 @@ User Stories on Github:
   
   
 Planning Links  
-  
-Technology Stack:   
-  
+
 ERD: https://dbdiagram.io/d/5f19d38ce586385b4ff7b210  
-  
 Mockup/Wireframes: https://sketchboard.me/lCfKvMkusgnz#/  
-  
+
+Technology Stack:   
+1.  Base  
+   * React  
+   * Bootstrap
+2.  UI
+   * Ant Design Icons  
+   *  Boostrap Icons  
+   *  Grommet-Icons  
+   *  Material-UI Checkboxes  
+   *  Typeicons  
+3.  UX Considerations
+  Using Reactstrap NavBar with an input field for the location (city, state), it limits input to alphabetical characters, commas, dashes, periods, and apostrophes, and passes the entered info to a dynamic route when a user clicks on Find Reststaurants.  If the information is not entered, a msg will appear prompting the user for this information. 
+Once the results are displayed, a heart outline will indicate the restaurant has not been added to their collection, while a solid heart will show that it has, as well as displaying the dining options and PPE (yes/no) value.  
+  The Collection can be filtered to the dining options from the NavBar dropdown selection.
+
 Other Research  
   
 For the restaurant API, I spent many hours trying to find the one that would give me the options needed, and found third party free option (restricted by fetch count) that offered access to TripAdvisor.  
