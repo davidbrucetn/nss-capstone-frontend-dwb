@@ -1,5 +1,5 @@
 $ nss-capstone-frontend-dwb  
-# Covid-Dining 
+# CovidDining 
 
 
 ![alt text](https://github.com/davidbrucetn/nss-capstone-frontend-dwb/blob/master/src/components/nav/images/logo.png?raw=true)
