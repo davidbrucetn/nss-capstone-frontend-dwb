@@ -1,11 +1,11 @@
 $ nss-capstone-frontend-dwb
 # CoviDining 
 
-Name:  David Bruce
-Email Address:  david.bruce.tn@gmail.com
-Mentor’s Name:  Jisie David
-Capstone Repo on Github: 
-https://github.com/davidbrucetn/nss-capstone-frontend-dwb
+  Name:  David Bruce
+  Email Address:  david.bruce.tn@gmail.com
+  Mentor’s Name:  Jisie David
+  Capstone Repo on Github: 
+  https://github.com/davidbrucetn/nss-capstone-frontend-dwb
 
 
 Name of Project: CoviDining
