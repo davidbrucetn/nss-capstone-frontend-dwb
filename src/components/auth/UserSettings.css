@@ -1,19 +1,23 @@
-.container__home {
+.container-fluid {
+    height: 90vh;
     display: flex;
     flex-flow: column;
     justify-content: flex-start;
     align-items: center;
-    height: 100vh;
-    width: auto;
     background-image: url("../nav/images/logo.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    -o-background-size: contain;
+    background-size: contain;   
+    width:100%;
 }
 
 .form__user {
-    height: 30vh;
+    height: 35vh;
     width: auto;
     display: flex;
     flex-flow: column nowrap;

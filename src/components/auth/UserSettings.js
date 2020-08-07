@@ -5,59 +5,74 @@ import APIManager from "../../modules/APIManager"
 import Helper from "../../modules/Helper"
 import "./UserSettings.css"
 
+
+
+
 const UserSettings = (props) => {
     const [ credentials, setCredentials ] = useState({ email: "", password: "", id: "" });
-    const [ users, setUsers ] = useState([])
     const [ alertmsg, setAlert ] = useState("");
-    const [ userObject, setUserObj ] = useState({});
     const [ activeUserObject, setActiveUserObject ] = useState({})
-    let userMatch = false;
+    const [ confirmLabel, setConfirmLabel ] = useState("Confirm Password")
+    
     let passwordMatch = false;
+    let newCredentials = {};
 
-    // Get Current User
-    const userEmail=Helper.getActiveUserEmail();
-    APIManager.getUserbyEmail(userEmail)
-    .then((userObjectArray) => {
-      setActiveUserObject(userObjectArray[0].id)
-    })
-
+    
 
         // Update state whenever an input field is edited
         const handleFieldChange = (evt) => {
             const stateToChange = { ...credentials };
             stateToChange[evt.target.id] = evt.target.value;
+            setConfirmLabel("Confirm Password")            
             setCredentials(stateToChange);
         };
 
+        const checkMatch = (e) => {
+            
+
+            if (credentials.confirmPassword !== undefined && credentials.newPassword !== undefined ) {
+                
+                
+                    if (credentials.confirmPassword !== credentials.newPassword ) {
+                        setConfirmLabel("Passwords Do Not Match")
+                    } else { passwordMatch = true }
+                
+            }
+        }
+
         const handleUserUpdate = (e) => {
                     
-                e.preventDefault();
-                users.forEach(user => {
-                    if (user.email === credentials.email) {
-                        userMatch = true;
-                        if (user.password === credentials.password) {
-                            passwordMatch = true;
-                            credentials.id = user.id;
-                            if (document.getElementById("localCreds").checked === true) {
-                                props.setUser(credentials,"local");
+                        if (activeUserObject.password === credentials.oldPassword) {
+                                passwordMatch = true;
+                            //let password remain the same if not changed
+                            if (credentials.newPassword !== null || credentials.newPassword !== "" )
+                            { activeUserObject.password = credentials.newPassword }
+                            APIManager.update(activeUserObject,"users")
+                                newCredentials.email = activeUserObject.email
+                                newCredentials.password = activeUserObject.password
+                                newCredentials.id = activeUserObject.id
+                            if (sessionStorage.getItem("credentials") === null)  {
+                                props.setUser(newCredentials,"local");
                             } else {
-                                props.setUser(credentials,"session")
+                                props.setUser(newCredentials,"session")
                             }; //end credential storage type if
                             props.history.push("/");
                         } //End password
-                    } //End user email
-                }); //end user array
+       
+                
                     
 
-                if (userMatch === false) { setAlert("User email not found") } 
-                if (userMatch === true && passwordMatch === false) { setAlert("User password incorrect") }
+                
+                if (passwordMatch === false) { setAlert("User password incorrect") }
             
         }; //end handleLogin
 
         const handleSubmitClick = (e) => {
             e.preventDefault();
-            if (userObject.password === credentials.oldPassword) {
-                if(credentials.password === credentials.confirmPassword) {
+            console.log(activeUserObject.password)
+            if (activeUserObject.password === credentials.oldPassword) {
+                console.log("Current Matched")
+                if(credentials.newPassword === credentials.confirmPassword) {
                     handleUserUpdate()    
                 } else {
                     props.showError('Passwords do not match');
@@ -68,14 +83,24 @@ const UserSettings = (props) => {
             
         }
 
+      
+
     
     useEffect(()=>{
-        APIManager.getAllUsers()
-                .then(response => {
-                    setUsers(response)
-                })
+        
+    // Get Current User
+    const userEmail=Helper.getActiveUserEmail();
+    console.log(userEmail)
+    APIManager.getUserbyEmail(userEmail)
+    .then((userObjectArray) => {
+        console.log(userObjectArray)
+      setActiveUserObject(userObjectArray[0])
+      
+    })
+
         if (alertmsg !== null && alertmsg !== "") {
-            props.showError(alertmsg)
+            props.showError(alertmsg) &&
+            props.push.history("/usersettings")
         }
         
     },[props,alertmsg])
@@ -83,25 +108,35 @@ const UserSettings = (props) => {
     
 
 return (
-    <div className="container__home">
+    <div className="container-fluid">
         <div className="container__form__user">
             <form className="form__user" onSubmit={handleSubmitClick}>
                 <fieldset className="fieldset__form__user">
                     <h3>Update User Password</h3>
                     <div className="formgrid__login">
-                        
+
+                    <input onChange={handleFieldChange} type="email"
+                        id="email"
+                        placeholder="Email address"
+                        autoComplete="username"
+                        className="hidden"
+                        required="" autoFocus="" />
+                            
+                    
                     <input type="password"
                             className="form-control"
                             id="oldPassword"
                             placeholder="Current Password"
+                            autoComplete="current-password"
                             required=""
                             onChange={handleFieldChange}  />
-                        <label htmlFor="inputPassword">New Password</label>
+                        <label htmlFor="inputPassword">Current Password</label>
 
                         <input type="password"
                             className="form-control"
                             id="newPassword"
                             placeholder="New Password"
+                            autoComplete="new-password"
                             required=""
                             onChange={handleFieldChange}  />
                         <label htmlFor="inputPassword">New Password</label>
@@ -110,16 +145,22 @@ return (
                             className="form-control" 
                             id="confirmPassword" 
                             placeholder="Confirm Password"
-                            onChange={handleFieldChange}  />
-                        <label htmlFor="exampleInputPassword1">Confirm Password</label>
+                            autoComplete="new-password"
+                            onChange={handleFieldChange}  
+                            onBlur={checkMatch}
+                            />
+                        <label htmlFor="exampleInputPassword1">{confirmLabel}</label>
                         
                     </div>
                     <div className="container__form__user--buttons">
                         <button type="submit">Update</button>
-                        <Link to={`/home`}><button>Cancel</button></Link>
+                        <Link to={`/`}><button>Cancel</button></Link>
                     </div>
                 </fieldset>
             </form>
+            <div className="alert alert-success mt-2" style={{display: credentials.successMessage ? 'block' : 'none' }} role="alert">
+                {credentials.successMessage}
+            </div>
         </div>
     </div>
     );

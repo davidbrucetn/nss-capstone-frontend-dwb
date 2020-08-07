@@ -40,6 +40,7 @@ const ApplicationViews = (props) => {
           }
         }}
       />
+      <AlertComponent errorMessage={errorMessage} hideError={updateErrorMessage}/>
       <Route exact path="/restaurant" render={props => <RestaurantList  {...props} />} />
       <Route exact path="/restaurant/:state/:city" render={props => <RestaurantList  {...props} />} />
       <Route exact path="/delivery/:state/:city" render={props => <RestaurantList  diningOptions="10600" {...props} />} />
@@ -76,7 +77,7 @@ const ApplicationViews = (props) => {
         }
       }} />
 
-      <AlertComponent errorMessage={errorMessage} hideError={updateErrorMessage}/>
+      
     </React.Fragment>
   );
 };
