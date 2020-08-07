@@ -66,7 +66,7 @@ function RegistrationForm(props) {
     }
    
     const redirectToHome = () => {
-        props.history.push('/home');
+        props.history.push('/');
     }
  
     const handleSubmitClick = (e) => {

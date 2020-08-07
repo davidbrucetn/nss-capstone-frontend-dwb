@@ -67,12 +67,14 @@ return (
                         <input onChange={handleFieldChange} type="email"
                         id="email"
                         placeholder="Email address"
+                        autoComplete="username"
                         required="" autoFocus="" />
                         <label htmlFor="inputEmail">Email address</label>
 
                         <input onChange={handleFieldChange} type="password"
                             id="password"
                             placeholder="Password"
+                            autoComplete="current-password"
                             required="" />
                         <label htmlFor="inputPassword">Password</label>
 
