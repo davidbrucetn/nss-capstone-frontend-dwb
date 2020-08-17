@@ -1,6 +1,5 @@
 import React, { useState,useEffect } from "react";
 import { withRouter } from "react-router-dom";
-import { Link } from "react-router-dom";
 import APIManager from "../../modules/APIManager"
 import Helper from "../../modules/Helper"
 import { Checkbox as DeleteAcctCheckbox } from '@material-ui/core';

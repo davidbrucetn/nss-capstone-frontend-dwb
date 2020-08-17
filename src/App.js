@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-//Children Components
 import NavbarMenu from "./components/nav/Navbs"
 import ApplicationViews from "./components/ApplicationViews"
 
@@ -33,6 +32,7 @@ const CovidDining = () => {
 
   useEffect(() => {
     isAuthenticated();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated()]);
 
     return (

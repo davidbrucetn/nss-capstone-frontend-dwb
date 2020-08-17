@@ -60,9 +60,8 @@ const CollectionList = (props) => {
  
   // got the owners from the API on the component's first render
   useEffect(() => {
-    
-   
-    getCollection()
+     getCollection()
+     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeUserId]);
 
   // Finally we use map() to "loop over" the owners array to show a list of owner cards

@@ -24,14 +24,17 @@ function RegistrationForm(props) {
 
             APIManager.getAllUsers()
             .then(users => {
+
+               if ( users.length > 0) { 
                if ( (users.some(user => user.email === credentials.email)) === true ) {
-                props.showError('This email has already been registered')  
+                props.showError('This email has already been registered')  }
                } else {
 
                     const newUserObj={
                         "email": credentials.email,
                         "password": credentials.password,
                     }
+
                     return fetch(`${jsonDB}/users`, {
                             method: "POST",
                             headers: {
@@ -39,6 +42,9 @@ function RegistrationForm(props) {
                             },
                             body: JSON.stringify(newUserObj)})
                             .then((response) => {
+                                console.log(response)
+                               
+                               
                                 if(response.ok){
                                     setCredentials(stateToChange => ({
                                         ...credentials,
@@ -89,6 +95,7 @@ function RegistrationForm(props) {
                 <input type="email" 
                        className="form-control" 
                        id="email" 
+                       autoComplete="username"
                        aria-describedby="emailHelp" 
                        placeholder="Enter email" 
                        value={credentials.email}
@@ -100,6 +107,7 @@ function RegistrationForm(props) {
                     <input type="password" 
                         className="form-control" 
                         id="password" 
+                        autoComplete="current-password"
                         placeholder="Password"
                         value={credentials.password}
                         onChange={handleFieldChange} 
@@ -110,6 +118,7 @@ function RegistrationForm(props) {
                     <input type="password" 
                         className="form-control" 
                         id="confirmPassword" 
+                        autoComplete="current-password"
                         placeholder="Confirm Password"
                         value={credentials.confirmPassword}
                         onChange={handleFieldChange} 
