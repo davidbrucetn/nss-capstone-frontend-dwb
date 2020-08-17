@@ -33,13 +33,13 @@ const CovidDining = () => {
 
   useEffect(() => {
     isAuthenticated();
-  }, []);
+  }, [isAuthenticated()]);
 
     return (
       <>
         <NavbarMenu  hasUser={hasUser} clearUser={clearUser} />
         
-        <ApplicationViews hasUser={hasUser} setUser={setUser} />
+        <ApplicationViews hasUser={hasUser} setUser={setUser} clearUser={clearUser} />
       </>
     );
   };

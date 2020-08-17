@@ -2,11 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './AlertComponent.css';
 function AlertComponent(props) {
     const [modalDisplay, toggleDisplay] = useState('none');
-    
-
     const openModal = () => {
-        toggleDisplay('block');
-        setTimeout(()=> {closeModal()},4000)     
+        toggleDisplay('block');     
     }
     const closeModal = () => {
         toggleDisplay('none'); 
@@ -14,7 +11,7 @@ function AlertComponent(props) {
     }
     useEffect(() => {
         if(props.errorMessage !== null) {
-            setTimeout(openModal(),2000)
+            openModal()
         } else {
             closeModal()
         }

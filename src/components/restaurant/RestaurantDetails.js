@@ -156,7 +156,6 @@ const handleRatingEdit = (editRatingObj) => {
   setRatings(editRatingObj)
   const ratingsButton = document.getElementById("ratingsButton")
   ratingsButton.textContent = "Save Edits"
-  // ratingsButton.onclick=(() => saveRatingEdits(editRatingObj))
 
 };
 
@@ -166,7 +165,7 @@ const handleRatingCancel = (evt) => {
   setIsLoading(true)
   
   history.push(`/collection/${restaurant.id}/details`)
-  // history.push(`/collection`)
+  
 
 }
 
@@ -188,7 +187,6 @@ const handleRatingCancel = (evt) => {
       (restaurant.cuisine.length !== 0  ) && setCuisine(<p><strong>Cuisine</strong> {restaurant.cuisine[0].name} </p>)
       if (restaurant.hours !== undefined ) {
         let tempOpHours = [];
-        // hours Math.floor(minutes / 60); minutes = minutes % 60;
         for (var d = 0; d < restaurant.hours.week_ranges.length; d++ ) {
         var weekday = new Array(7);
         weekday[0] = "Sunday";
