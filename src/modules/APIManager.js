@@ -56,7 +56,11 @@ export default {
     },
     getAllUsers() {
         return fetch(`${jsonDB}/users`)
-                .then(response => response.json())
+        .then((response) => {return response.json()})
+        .catch(err => {
+	        return "empty";
+        });
+
     },
     getTripAdvisorLocationCode(cityStateObj) {
         return fetch(`https://tripadvisor1.p.rapidapi.com/locations/search?location_id=1&limit=1&sort=relevance&offset=0&lang=en_US&currency=USD&units=km&query=${cityStateObj.city}%252C%20${cityStateObj.state}`, {

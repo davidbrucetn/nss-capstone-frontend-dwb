@@ -1,0 +1,52 @@
+{
+  "users": [],
+  "dining_options": [
+    {
+      "id": 1,
+      "code": "10600",
+      "label": "Delivery"
+    },
+    {
+      "id": 2,
+      "code": "10601",
+      "label": "Takeout"
+    },
+    {
+      "id": 3,
+      "code": "10602",
+      "label": "Reservations"
+    },
+    {
+      "id": 4,
+      "code": "10603",
+      "label": "Outdoor Seating"
+    },
+    {
+      "id": 5,
+      "code": "10702",
+      "label": "Private Dining"
+    },
+    {
+      "id": 6,
+      "code": "10861",
+      "label": "Wheelchair Accessible"
+    },
+    {
+      "id": 7,
+      "code": "10862",
+      "label": "Serves Alcohol"
+    },
+    {
+      "id": 8,
+      "code": "20992",
+      "label": "Drive Thru"
+    },
+    {
+      "id": 9,
+      "code": "all",
+      "label": "All"
+    }
+  ],
+  "collection": [],
+  "ratings": []
+}

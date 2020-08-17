@@ -97,7 +97,7 @@ const handleOptionChange = (evt) => {
         return APIManager.deleteRating(ratingEntry.id)
         .then(()=> {
           APIManager.deleteObject(restaurant.id,"collection").then(() =>
-          props.history.push(`/collection`)
+          props.history.push(`/`)
           );    
         })
       })
@@ -356,7 +356,7 @@ const handleRatingCancel = (evt) => {
         }
     }
     APICall(props.locationId)
-
+   // eslint-disable-next-line react-hooks/exhaustive-deps
 },[props.locationId,props.location.pathname,isLoading])
 
   return (
