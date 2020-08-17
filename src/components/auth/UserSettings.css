@@ -14,15 +14,17 @@
     -o-background-size: contain;
     background-size: contain;   
     width:100%;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .form__user {
-    height: 35vh;
+    height: 40vh;
     width: auto;
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
     color: #f2e1c2;
+    
 
 }
 
@@ -34,7 +36,12 @@
     
 }
 
-
+.redButton {
+    color: darkred;
+    font-size: 4em;
+    transition: all 0.8s
+  }
+  
 
 .container__form__user
 {
@@ -50,15 +57,25 @@
 }
 
 
+.div__delete {
+    color: darkred;
+    font-family: 'Times New Roman', Times, serif;
+}
+
 .container__form__user--buttons {
     display: flex;
     flex-flow: row nowrap;
-    font-size: .8em;
+    font-size: 1em;
     justify-content: space-between;
     
-    
 }
-button {
+
+.container__form__user--buttons > button {
+    border-radius: 8px;
     font-size: 1em;
+}
+Link  {
+    font-size: 1em;
+    border-radius: 8px;
 }
 

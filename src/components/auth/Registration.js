@@ -78,11 +78,13 @@ function RegistrationForm(props) {
         }
     }
     return(
-    <div className="container__home">
+    <div className="container__login">
         <div className="container__form__login">
-        <div className="card col-12 col-lg-4 login-card mt-2 hv-center">
+        
             <form>
+            <fieldset className="form__fieldset__reg">
                 <div className="form-group text-left">
+                
                 <label htmlFor="exampleInputEmail1">Email address</label>
                 <input type="email" 
                        className="form-control" 
@@ -125,18 +127,21 @@ function RegistrationForm(props) {
                     Register
                 </button>
                 </div>
-
-            </form>
-            <div className="alert alert-success mt-2" style={{display: credentials.successMessage ? 'block' : 'none' }} role="alert">
-                {credentials.successMessage}
-            </div>
-            <div className="mt-2">
+                <div className="mt-2">
                 <span>Already have an account? </span>
                 <Link to={`/login`}>
               <button>Login Here</button>
             </Link>
             </div>
+                </fieldset>
+
+
+            </form>
+            <div className="alert alert-success mt-2" style={{display: credentials.successMessage ? 'block' : 'none' }} role="alert">
+                {credentials.successMessage}
             </div>
+            
+        
         </div>
     </div>
     )

@@ -21,7 +21,7 @@ const ApplicationViews = (props) => {
   return (
 
     <React.Fragment>
-
+     
       <Route path="/login" render={props => {
         return <Login setUser={setUser} showError={updateErrorMessage} updateTitle={updateTitle} {...props} />
       }}
@@ -30,17 +30,17 @@ const ApplicationViews = (props) => {
         return <RegistrationForm setUser={setUser} showError={updateErrorMessage} updateTitle={updateTitle} {...props} />
       }}
       />
-            
+      <AlertComponent errorMessage={errorMessage} hideError={updateErrorMessage} {...props} />    
       <Route
         exact path="/" render={props => {
           if (hasUser) {
             return <Home />;
           } else {
-            return <Redirect to="/login" />
+            return <Redirect to="/login" {...props} />
           }
         }}
       />
-      <AlertComponent errorMessage={errorMessage} hideError={updateErrorMessage}/>
+      
       <Route exact path="/restaurant" render={props => <RestaurantList  {...props} />} />
       <Route exact path="/restaurant/:state/:city" render={props => <RestaurantList  {...props} />} />
       <Route exact path="/delivery/:state/:city" render={props => <RestaurantList  diningOptions="10600" {...props} />} />

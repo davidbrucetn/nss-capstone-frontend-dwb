@@ -51,7 +51,7 @@ const CollectionList = (props) => {
     return APIManager.getCollectionDiningOptions(activeUserId,filterCodes)
     .then(response => {
         setCollection(response);
-
+       
         });
   };
 

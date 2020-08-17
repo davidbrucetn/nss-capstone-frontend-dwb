@@ -8,8 +8,20 @@
 .form-group {
     display: block;
     margin: 1vh 0 .5vh 0;
+    
 }
- 
+
+
+
+.form__fieldset__reg  {
+    width: 20em;
+    padding: 1em 2em;
+    background:linear-gradient(to left, #955DFF, #6FAAFF);
+    border-radius: 30px;
+    box-shadow:0 6px 10px 0 rgba(172, 33, 9, 0.2),0 10px 20px 0 rgba(4, 37, 90, 0.19);
+    
+}
+
 .mt-2 {
     margin: 0 0 .5vh 0;
 }

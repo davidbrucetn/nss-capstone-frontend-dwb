@@ -58,7 +58,7 @@ const Login = (props) => {
     
 
 return (
-    <div className="container__home">
+    <div className="container__login">
         <div className="container__form__login">
             <form className="form__login" onSubmit={handleLogin}>
                 <fieldset className="fieldset__form__login">

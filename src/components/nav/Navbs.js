@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { NavLink as RRNavLink, withRouter  } from "react-router-dom";
 import { FaHome } from "react-icons/fa"
 import 'bootstrap/dist/css/bootstrap.min.css'; 
@@ -148,16 +148,16 @@ const NavbarMenu = (props) => {
                                                         
                             <NavItem>
                              {props.hasUser
-                                ? <span className="nav-link" onClick={handleLogout}> Logout </span>
+                                ? <span className="nav-link" onClick={handleLogout} > Logout </span>
                                 :  
-                                <NavLink tag={RRNavLink} className="nav-link" to="/login"> Login </NavLink>
+                                null
                                 }
                             </NavItem>
                             <NavItem>
                              {props.hasUser
                                 ? <NavLink tag={RRNavLink} className="nav-link" to="/usersettings"> User Settings </NavLink>
                                 :  
-                                <NavLink tag={RRNavLink} className="nav-link" to="/login"> Login </NavLink>
+                                null
                                 }
                             </NavItem>
 

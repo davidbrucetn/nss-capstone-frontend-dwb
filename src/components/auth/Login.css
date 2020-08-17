@@ -1,9 +1,9 @@
-.container__home {
+.container__login {
     display: flex;
     flex-flow: column;
     justify-content: flex-start;
     align-items: center;
-    height: 100vh;
+    height: 80vh;
     width: auto;
     background-image: url("../nav/images/logo.png");
     background-size: contain;
