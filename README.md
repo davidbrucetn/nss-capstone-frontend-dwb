@@ -7,11 +7,13 @@ $ nss-capstone-frontend-dwb
 
 	Name:	David Bruce  
 	Email Address:	david.bruce.tn@gmail.com  
-	Mentor’s Name:	Jisie David  
+	Mentors:	Jisie David, Brenda Long  
 	Capstone Repo on Github:   
 	https://github.com/davidbrucetn/nss-capstone-frontend-dwb  
-  
+	
 Name of Project: CoviDining  
+
+[Capstone Presentation PDF](https://github.com/davidbrucetn/nss-capstone-frontend-dwb/blob/master/Covid-Dining%20Front-End%20Capstone.pdf)
   
 Brief Proposal: CoviDining is a restaurant app for the Covid life, for people to look up restaurants that either have delivery, outdoor dining, or drive through windows, and save them to their list. If they don't have outdoor dining, they can save the restaurant details, like waitstaff wearing masks, etc to their collection.  
   
