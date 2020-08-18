@@ -7,11 +7,13 @@ $ nss-capstone-frontend-dwb
 
 	Name:	David Bruce  
 	Email Address:	david.bruce.tn@gmail.com  
-	Mentor’s Name:	Jisie David  
+	Mentors:	Jisie David, Brenda Long  
 	Capstone Repo on Github:   
 	https://github.com/davidbrucetn/nss-capstone-frontend-dwb  
-  
+	
 Name of Project: CoviDining  
+
+[Capstone Presentation PDF](https://github.com/davidbrucetn/nss-capstone-frontend-dwb/blob/master/Covid-Dining%20Front-End%20Capstone.pdf)
   
 Brief Proposal: CoviDining is a restaurant app for the Covid life, for people to look up restaurants that either have delivery, outdoor dining, or drive through windows, and save them to their list. If they don't have outdoor dining, they can save the restaurant details, like waitstaff wearing masks, etc to their collection.  
   
@@ -79,3 +81,29 @@ Other Research
 For the restaurant API, I spent many hours trying to find the one that would give me the options needed, and found third party free option (restricted by fetch count) that offered access to TripAdvisor.  
 I’ve become fairly knowledgeable about CSS since starting at NSS, so I’ll probably do my own design versus trying to learn a template.	  
 For the stretch, provided I get that far, I will try to checkout Cloudinary for image storage, since I saw it repeatedly mentioned on other capstone presentations.  
+
+## Installation
+1.  Clone the repository to a React-enabled directory
+2.  Satisfy the following dependencies with npm install:
+    *  "@material-ui/core"
+    *  "@material-ui/icons"
+    *  "@material-ui/styles"
+    *  "bootstrap"
+    *  "jquery"
+    *  "popper.js"
+    *  "react-bootstrap"
+    *  "react-dom"
+    *  "react-icons"
+    *  "react-router-dom"
+    *  "react-scripts"
+    *  "react-tiny-link"
+    *  "reactstrap"
+    *  "resolve-url-loader"
+3.  In the api directory, run json-server 
+3.  Run npm start, once completed.
+
+## Instructions
+1.  Register a new user.
+2.  Type in a city, state in the search box, and go to Search Restaurants, then select a Dining Option.
+3.  Click the heart icon for any restaurants you want to save. These will show up in your Collection.
+4.  Once a restaurant is saved, you can add ratings and edit dining options for that establishment.
