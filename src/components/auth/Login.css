@@ -13,7 +13,7 @@
 }
 
 .form__login {
-    height: 30vh;
+    height: auto;
     width: auto;
     display: flex;
     flex-flow: column nowrap;
@@ -34,14 +34,9 @@
 
 .container__form__login
 {
-    margin: 0;
     display: flex;
     flex-flow: column;
-    width: 50vw;
-    height: 42vh;
-    padding:20px 15px;
-    padding-top:0px;
-    background-color: inherit;
+    width:40vw;
     border-radius: 30px;
 }
 

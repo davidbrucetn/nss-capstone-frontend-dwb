@@ -1,5 +1,6 @@
   .navbar {
     background-color: #8c0303;
+    height: auto;
   }
   .navbar .navbar-brand {
     color: #f2e1c2;
