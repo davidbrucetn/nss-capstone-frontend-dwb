@@ -1,5 +1,7 @@
 package-lock.json
 node_modules/
+api
+covidining.json
 database.json
 .DS_Store
 __pycache__
