@@ -42,8 +42,6 @@ function RegistrationForm(props) {
                             },
                             body: JSON.stringify(newUserObj)})
                             .then((response) => {
-                                console.log(response)
-                               
                                
                                 if(response.ok){
                                     setCredentials(stateToChange => ({
