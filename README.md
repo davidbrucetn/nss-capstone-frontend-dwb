@@ -107,3 +107,5 @@ For the stretch, provided I get that far, I will try to checkout Cloudinary for 
 2.  Type in a city, state in the search box, and go to Search Restaurants, then select a Dining Option.
 3.  Click the heart icon for any restaurants you want to save. These will show up in your Collection.
 4.  Once a restaurant is saved, you can add ratings and edit dining options for that establishment.
+
+![Covid-Dining Demo](https://github.com/davidbrucetn/nss-capstone-frontend-dwb/blob/master/CovidDining-Demo.gif)
