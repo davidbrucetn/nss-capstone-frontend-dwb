@@ -24,17 +24,14 @@ function RegistrationForm(props) {
 
             APIManager.getAllUsers()
             .then(users => {
-
-               if ( users.length > 0) { 
                if ( (users.some(user => user.email === credentials.email)) === true ) {
-                props.showError('This email has already been registered')  }
+                props.showError('This email has already been registered')  
                } else {
 
                     const newUserObj={
                         "email": credentials.email,
                         "password": credentials.password,
                     }
-
                     return fetch(`${jsonDB}/users`, {
                             method: "POST",
                             headers: {
@@ -42,7 +39,6 @@ function RegistrationForm(props) {
                             },
                             body: JSON.stringify(newUserObj)})
                             .then((response) => {
-                               
                                 if(response.ok){
                                     setCredentials(stateToChange => ({
                                         ...credentials,
